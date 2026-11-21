@@ -1,0 +1,36 @@
+name: Collect verified macOS installer
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: read
+jobs:
+  package:
+    runs-on: macos-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Require the completed checks
+        run: test "$(gh api repos/Juanexgo/ForgeIDE/actions/runs/44879776714 --jq '.conclusion')" = success
+      - uses: actions/download-artifact@v4
+        with:
+          name: unsigned-preview-macos-latest
+          run-id: 44876977785
+          github-token: ${{ github.token }}
+          path: incoming
+      - name: Build and verify HFS+ disk image from the native CI package
+        run: |
+          zipfile=$(find incoming -maxdepth 1 -name '*.zip' -print -quit)
+          test -n "$zipfile"
+          ditto -x -k "$zipfile" staging
+          test -d staging/ForgeIDE.app
+          test "$(lipo -archs staging/ForgeIDE.app/Contents/MacOS/ForgeIDE)" = arm64
+          hdiutil create -volname ForgeIDE -srcfolder staging -fs HFS+ -format UDZO ForgeIDE-0.9.0-alpha.1-macOS-arm64.dmg
+          hdiutil verify ForgeIDE-0.9.0-alpha.1-macOS-arm64.dmg
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';import {createHash} from 'node:crypto';const name='ForgeIDE-0.9.0-alpha.1-macOS-arm64.dmg',data=fs.readFileSync(name);fs.writeFileSync('mac-installer.json',JSON.stringify({name,platform:'darwin',arch:'arm64',kind:'dmg',bytes:data.length,sha256:createHash('sha256').update(data).digest('hex'),sourceCommit:'1489c3693f55fd892a13a0085d9cc3205dd169fd',run:44876977785,unsigned:true},null,2)+'\n');
+          JS
+      - name: Attach verified installer to the draft release
+        run: gh release upload v0.9.0-alpha.1 ForgeIDE-0.9.0-alpha.1-macOS-arm64.dmg mac-installer.json --clobber
