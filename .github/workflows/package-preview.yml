@@ -1,0 +1,50 @@
+name: Package preview (unsigned)
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  package:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-24.04, windows-latest]
+    runs-on: ${{ matrix.os }}
+    env:
+      PUPPETEER_SKIP_DOWNLOAD: 'true'
+      PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
+      CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Linux native prerequisites
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y libx11-dev libxkbfile-dev libsecret-1-dev
+      - uses: dtolnay/rust-toolchain@1.85.1
+      - run: corepack enable
+      - run: corepack prepare yarn@1.22.22 --activate
+      - run: yarn install --frozen-lockfile
+      - run: yarn download:plugins
+      - run: yarn rebuild
+      - run: yarn build
+      - run: yarn test
+      - name: Package macOS host architecture
+        if: runner.os == 'macOS'
+        run: yarn workspace @forgeide/desktop exec electron-builder --mac zip --publish never
+      - name: Package Windows host architecture
+        if: runner.os == 'Windows'
+        run: yarn workspace @forgeide/desktop exec electron-builder --win nsis --publish never
+      - name: Package Linux host architecture
+        if: runner.os == 'Linux'
+        run: yarn workspace @forgeide/desktop exec electron-builder --linux AppImage deb --publish never
+      - uses: actions/upload-artifact@v4
+        with:
+          name: unsigned-preview-${{ matrix.os }}
+          path: |
+            dist-0.9/*.zip
+            dist-0.9/*.exe
+            dist-0.9/*.AppImage
+            dist-0.9/*.deb
+          if-no-files-found: error

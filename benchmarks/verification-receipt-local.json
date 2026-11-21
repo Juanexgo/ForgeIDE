@@ -1,0 +1,19 @@
+{
+  "id": "31632e7f-c20e-4614-9725-31d602f65ce4",
+  "proposalId": "db58232c-b371-4cac-a804-c1872d6570c6",
+  "proof": "c544ab9cdca9796a8e8e7459708cd04269a213dfc222d13ff7eb2058bd54b0ae",
+  "created": "2026-11-20T01:47:24.285Z",
+  "status": "passed",
+  "image": "node@sha256:116b800c3754b440ee0aa3ed2f20f5bf3d99a554bfd9adeea09ea8017f6e85f5",
+  "command": [
+    "node",
+    "--test",
+    "--test-reporter=tap"
+  ],
+  "snapshot": "61bc6ae4d69c6bb624f94f8505f73e702e564799b67bb6ab5d912714fbcba60b",
+  "files": 2,
+  "bytes": 527,
+  "exitCode": 0,
+  "elapsedMs": 14927,
+  "output": "TAP version 13\n# Subtest: patch\nok 1 - patch\n  ---\n  duration_ms: 44.237458\n  type: 'test'\n  ...\n# Subtest: isolation\nok 2 - isolation\n  ---\n  duration_ms: 19.739625\n  type: 'test'\n  ...\n1..2\n# tests 2\n# suites 0\n# pass 2\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 1630.887334\n"
+}

@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "tasks": [
+    {
+      "label": "Check workspace",
+      "program": "cargo",
+      "args": [
+        "check",
+        "--locked",
+        "--workspace"
+      ],
+      "kind": "build"
+    },
+    {
+      "label": "Test workspace",
+      "program": "cargo",
+      "args": [
+        "test",
+        "--locked",
+        "--workspace"
+      ],
+      "kind": "test"
+    },
+    {
+      "label": "Check formatting",
+      "program": "cargo",
+      "args": [
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "kind": "build"
+    }
+  ]
+}

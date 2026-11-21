@@ -1,0 +1,6 @@
+{
+  "schema": 1,
+  "feed": "https://github.com/Juanexgo/ForgeIDE/releases/download/updates-alpha/update-feed.json",
+  "publicKey": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAvXKGRKExbwmAGu4KXm5zMoIB2Q0fyS5zdJsnYz69IRM=\n-----END PUBLIC KEY-----\n",
+  "repository": "Juanexgo/ForgeIDE"
+}

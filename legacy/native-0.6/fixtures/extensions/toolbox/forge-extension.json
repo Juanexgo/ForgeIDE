@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "id": "forge.toolbox",
+  "name": "Forge Toolbox",
+  "version": "1.0.0",
+  "engine": "^1.0",
+  "description": "Example native extension with a palette command, a theme and a Rust snippet.",
+  "publisher": "ForgeIDE",
+  "license": "MIT",
+  "commands": [
+    {
+      "id": "uppercase-first",
+      "title": "Toolbox: Uppercase first letter",
+      "module": "uppercase-first.wasm"
+    }
+  ],
+  "snippets": [
+    {
+      "prefix": "answer",
+      "extensions": [
+        "rs"
+      ],
+      "body": "fn answer() -> i32 {\n    42\n}"
+    }
+  ],
+  "themes": [
+    {
+      "name": "Toolbox Midnight",
+      "dark": true,
+      "colors": {
+        "editor": [
+          15,
+          21,
+          32
+        ],
+        "panel": [
+          21,
+          29,
+          43
+        ],
+        "accent": [
+          113,
+          174,
+          255
+        ]
+      },
+      "syntax": {
+        "keyword": [
+          184,
+          151,
+          255
+        ],
+        "string": [
+          151,
+          206,
+          157
+        ]
+      }
+    }
+  ]
+}

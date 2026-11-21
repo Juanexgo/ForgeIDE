@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="{8B480F80-699D-45F5-9501-172496D8342A}" UpgradeCode="{64781A1B-9806-4B98-A5FA-B1CFD27CC29E}"
+           Name="ForgeIDE" Version="0.6.0" Manufacturer="ForgeIDE" Language="1033">
+    <Package Id="*" InstallerVersion="500" Compressed="yes" InstallScope="perMachine" />
+    <MediaTemplate EmbedCab="yes" />
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFiles64Folder">
+        <Directory Id="ForgeIDEInstall" Name="ForgeIDE">
+          <Component Id="ForgeIDEExecutable" Guid="{E6A3C704-675E-4AF4-A95E-EFA6B03D7586}" Win64="yes">
+            <File Id="ForgeIDEProgram" Source="$(var.Binary)" Name="forgeide.exe" KeyPath="yes" />
+            <File Id="InterLicense" Source="Inter-OFL.txt" />
+            <File Id="IBMPlexMonoLicense" Source="IBMPlexMono-OFL.txt" />
+          </Component>
+        </Directory>
+      </Directory>
+    </Directory>
+    <Feature Id="ForgeIDEMain" Title="ForgeIDE" Level="1">
+      <ComponentRef Id="ForgeIDEExecutable" />
+    </Feature>
+  </Product>
+</Wix>

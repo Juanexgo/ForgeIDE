@@ -1,0 +1,164 @@
+{
+  "name": "@forgeide/desktop",
+  "version": "0.9.0-alpha.1",
+  "private": true,
+  "license": "MIT",
+  "productName": "ForgeIDE",
+  "description": "ForgeIDE professional desktop IDE",
+  "author": "ForgeIDE contributors",
+  "homepage": "https://theia-ide.org/",
+  "main": "forge-main.cjs",
+  "theia": {
+    "target": "electron",
+    "frontend": {
+      "config": {
+        "applicationName": "ForgeIDE",
+        "reloadOnReconnect": true,
+        "preferences": {
+          "files.autoSave": "off",
+          "toolbar.showToolbar": true
+        },
+        "electron": {
+          "appUserModelId": "dev.forgeide.desktop",
+          "uriScheme": "forgeide"
+        },
+        "uriScheme": "forgeide"
+      }
+    },
+    "backend": {
+      "config": {
+        "configurationFolder": ".forgeide",
+        "resolveSystemPlugins": false,
+        "frontendConnectionTimeout": -1
+      }
+    }
+  },
+  "dependencies": {
+    "@theia/core": "1.77.0",
+    "@theia/electron": "1.77.0",
+    "@theia/editor": "1.77.0",
+    "@theia/monaco": "1.77.0",
+    "@theia/navigator": "1.77.0",
+    "@theia/filesystem": "1.77.0",
+    "@theia/workspace": "1.77.0",
+    "@theia/preferences": "1.77.0",
+    "@theia/keymaps": "1.77.0",
+    "@theia/file-search": "1.77.0",
+    "@theia/search-in-workspace": "1.77.0",
+    "@theia/markers": "1.77.0",
+    "@theia/messages": "1.77.0",
+    "@theia/output": "1.77.0",
+    "@theia/outline-view": "1.77.0",
+    "@theia/scm": "1.77.0",
+    "@theia/task": "1.77.0",
+    "@theia/terminal": "1.77.0",
+    "@theia/terminal-manager": "1.77.0",
+    "@theia/debug": "1.77.0",
+    "@theia/console": "1.77.0",
+    "@theia/test": "1.77.0",
+    "@theia/timeline": "1.77.0",
+    "@theia/toolbar": "1.77.0",
+    "@theia/userstorage": "1.77.0",
+    "@theia/variable-resolver": "1.77.0",
+    "@theia/bulk-edit": "1.77.0",
+    "@theia/plugin-ext": "1.77.0",
+    "@theia/plugin-ext-vscode": "1.77.0",
+    "@theia/vsx-registry": "1.77.0",
+    "@theia/getting-started": "1.77.0",
+    "@theia/callhierarchy": "1.77.0",
+    "@theia/typehierarchy": "1.77.0",
+    "@theia/remote": "1.77.0",
+    "@theia/remote-wsl": "1.77.0",
+    "@theia/dev-container": "1.77.0",
+    "@theia/ai-core": "1.77.0",
+    "@theia/ai-core-ui": "1.77.0",
+    "@theia/ai-chat": "1.77.0",
+    "@theia/ai-chat-ui": "1.77.0",
+    "@theia/ai-editor": "1.77.0",
+    "@theia/ai-history": "1.77.0",
+    "@theia/ai-ide": "1.77.0",
+    "@theia/ai-code-completion": "1.77.0",
+    "@theia/ai-openai": "1.77.0",
+    "@theia/ai-ollama": "1.77.0",
+    "@theia/ai-mcp": "1.77.0",
+    "@theia/ai-terminal": "1.77.0",
+    "@forgeide/workbench": "0.9.0-alpha.1",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "electron": "44.9.1",
+    "electron-builder": "26.15.3",
+    "@theia/cli": "1.77.0"
+  },
+  "scripts": {
+    "build": "theia build --app-target=electron --mode production",
+    "build:dev": "theia build --app-target=electron --mode development",
+    "start": "theia start",
+    "rebuild": "theia rebuild:electron --cacheRoot ../..",
+    "package:mac": "electron-builder --mac dir --arm64 --publish never"
+  },
+  "build": {
+    "appId": "dev.forgeide.desktop",
+    "productName": "ForgeIDE",
+    "copyright": "Copyright \u00a9 ForgeIDE contributors",
+    "directories": {
+      "output": "../../dist-0.9"
+    },
+    "files": [
+      "forge-main.cjs",
+      "lib/**",
+      "resources/**",
+      "package.json",
+      "node_modules/**"
+    ],
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "identity": null,
+      "target": [
+        "dir"
+      ],
+      "icon": "resources/ForgeIDE.icns"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "category": "Development"
+    },
+    "protocols": [
+      {
+        "name": "ForgeIDE",
+        "schemes": [
+          "forgeide"
+        ]
+      }
+    ],
+    "extraResources": [
+      {
+        "from": "../../plugins",
+        "to": "plugins"
+      },
+      {
+        "from": "../../engine/bin",
+        "to": "engine"
+      }
+    ],
+    "asarUnpack": [
+      "**/*.node",
+      "**/node-pty/**",
+      "**/@vscode/ripgrep/**",
+      "lib/prebuilds/**",
+      "lib/backend/native/**",
+      "lib/backend/macos-trash",
+      "lib/backend/forge-graph-worker.js"
+    ],
+    "npmRebuild": false,
+    "electronDist": "../../node_modules/electron/dist"
+  }
+}

@@ -1,0 +1,17 @@
+node_modules/
+lib/
+src-gen/
+dist/
+plugins/*
+!plugins/.gitkeep
+engine/target/
+*.log
+.env
+engine/bin/
+dist-0.8/
+dist-0.8.1/
+dist-0.9/
+.qa-tools/
+.env.*
+!*.example
+.browser_modules/

@@ -1,0 +1,53 @@
+{
+  "date": "2026-11-21T00:06:38.853Z",
+  "node": "v24.13.1",
+  "platform": "darwin",
+  "arch": "arm64",
+  "cpu": "Apple M2",
+  "ramGB": 8,
+  "scope": "Static JS/TS graph only; generated fixtures; 3 warm-process samples. No editor/input/IDE startup benchmark or competitor comparison.",
+  "results": [
+    {
+      "fixtureFiles": 100,
+      "resolvedModules": 100,
+      "edges": 99,
+      "truncated": false,
+      "samples": [
+        94.93570899999986,
+        154.79220799999985,
+        221.7272499999999
+      ],
+      "p50": 154.79220799999985,
+      "p95": 221.7272499999999,
+      "rssMB": 112
+    },
+    {
+      "fixtureFiles": 1000,
+      "resolvedModules": 1000,
+      "edges": 999,
+      "truncated": false,
+      "samples": [
+        1065.5365829999996,
+        1601.3739999999998,
+        1685.1658749999997
+      ],
+      "p50": 1601.3739999999998,
+      "p95": 1685.1658749999997,
+      "rssMB": 66
+    },
+    {
+      "fixtureFiles": 10000,
+      "resolvedModules": 1000,
+      "edges": 996,
+      "truncated": true,
+      "samples": [
+        486.9837919999991,
+        604.4474589999991,
+        614.0008330000001
+      ],
+      "p50": 604.4474589999991,
+      "p95": 614.0008330000001,
+      "rssMB": 89
+    }
+  ]
+}

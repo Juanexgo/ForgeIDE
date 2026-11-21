@@ -1,0 +1,25 @@
+{
+  "schema_version":1,
+  "id":"forge.midnight",
+  "name":"Midnight workspace",
+  "version":"1.0.0",
+  "snippets":[{"prefix":"answer","extensions":["rs"],"body":"fn ${1:name}() -> u32 {\n    42\n}\n${0}"}],
+  "themes":[{
+    "name":"Midnight",
+    "dark":true,
+    "colors":{
+      "rail":[15,20,30],
+      "panel":[21,28,40],
+      "editor":[12,17,26],
+      "elevated":[31,41,56],
+      "border":[43,55,74],
+      "text":[225,234,247],
+      "muted":[155,174,199],
+      "dim":[117,137,162],
+      "accent":[111,190,255],
+      "active":[31,58,83],
+      "green":[136,220,169],
+      "red":[255,152,168]
+    }
+  }]
+}

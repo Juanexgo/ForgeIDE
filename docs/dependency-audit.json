@@ -1,0 +1,18 @@
+{
+  "date": "2026-11-21",
+  "tool": "yarn audit --json",
+  "scope": "NPM lockfile including development dependencies; excludes Cargo/VSIX/OS",
+  "summary": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0
+    },
+    "dependencies": 1203,
+    "devDependencies": 0,
+    "optionalDependencies": 0,
+    "totalDependencies": 1203
+  }
+}

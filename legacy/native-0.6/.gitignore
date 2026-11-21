@@ -1,0 +1,3 @@
+/target/
+/fixtures/rust-analyzer/target/
+/fixtures/rust-analyzer/Cargo.lock
