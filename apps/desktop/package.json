@@ -134,7 +134,8 @@
       ],
       "category": "Development",
       "maintainer": "ForgeIDE contributors <107702735+Juanexgo@users.noreply.github.com>",
-      "executableName": "forgeide"
+      "executableName": "forgeide",
+      "artifactName": "ForgeIDE-${version}-${arch}.${ext}"
     },
     "protocols": [
       {
