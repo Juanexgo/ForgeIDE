@@ -30,3 +30,7 @@ El benchmark de grafo genera 100/1000/10000 archivos, informa truncado, tres mue
 - El ensayo Qwen3:4b alcanzó el límite de generación tanto con 384 como con 1024 tokens; un ensayo Llama no leyó archivos y otro propuso un fragmento incompleto. Ninguno se cuenta como tarea IA aprobada. Docker se detuvo durante generación y se volvió a iniciar para el resto de pruebas; no se alteró la memoria de 5120 MiB.
 - No se dispone de certificado Developer ID de distribución ni certificado de firma Windows. La firma Ed25519 del feed autentica metadatos y hashes; no reemplaza firma/notarización del sistema operativo.
 - Fresh OAuth y token realmente expirado requieren un flujo real de autorización del usuario. Las pruebas deterministas de expiración no son esa aprobación.
+
+## Publicación y actualizaciones
+
+La release v0.9.0-alpha.1 contiene DMG macOS ARM64, NSIS Windows x64, AppImage/DEB Linux x64 y código. Los cuatro tamaños y SHA256 se compararon con los digests devueltos por GitHub. El feed público updates-alpha pasó la comprobación real HTTPS, firma Ed25519 y versiones con UpdateService de producción: 0.8.1 vio una actualización y 0.9.0 quedó al día. No se ejecutaron instaladores durante esa prueba. Ver benchmarks/update-public-feed.json y los límites de firma del SO arriba.

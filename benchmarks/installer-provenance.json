@@ -1,0 +1,51 @@
+{
+  "version": "0.9.0-alpha.1",
+  "CI": "https://github.com/Juanexgo/ForgeIDE/actions/runs/44879776714",
+  "assets": [
+    {
+      "name": "ForgeIDE-0.9.0-alpha.1-macOS-arm64.dmg",
+      "platform": "darwin",
+      "arch": "arm64",
+      "kind": "dmg",
+      "bytes": 351039169,
+      "sha256": "7b7e1fe70dbe7b0d40a123a1baaa8b5317565b01c7e45fc1550173f66968398d",
+      "sourceCommit": "1489c3693f55fd892a13a0085d9cc3205dd169fd",
+      "run": 44876977785,
+      "unsigned": true
+    },
+    {
+      "name": "ForgeIDE-0.9.0-alpha.1-Windows-x64.exe",
+      "platform": "win32",
+      "arch": "x64",
+      "kind": "exe",
+      "bytes": 242985493,
+      "sha256": "b504f9af7be702fdf6e357968891b43d3ff6fbfcaa61b55838b8da535ebacc94",
+      "sourceCommit": "1489c3693f55fd892a13a0085d9cc3205dd169fd",
+      "run": 44876977785,
+      "unsigned": true
+    },
+    {
+      "name": "ForgeIDE-0.9.0-alpha.1-Linux-x64.deb",
+      "platform": "linux",
+      "arch": "x64",
+      "kind": "deb",
+      "bytes": 226749600,
+      "sha256": "cbf905088fbb57b93c244a4a56071bdd8b6f51c44d08f913ed93a51a1f77ca66",
+      "sourceCommit": "e8a7b5c5bf8da6af167efeb1a7e9705721db2def",
+      "run": 44878027543,
+      "unsigned": true
+    },
+    {
+      "name": "ForgeIDE-0.9.0-alpha.1-Linux-x64.AppImage",
+      "platform": "linux",
+      "arch": "x64",
+      "kind": "AppImage",
+      "bytes": 295396787,
+      "sha256": "a6973b127a5b72accb1540982145ac0bf2cb788c82950b0e0a37cbf26b2b6cf6",
+      "sourceCommit": "e8a7b5c5bf8da6af167efeb1a7e9705721db2def",
+      "run": 44878027543,
+      "unsigned": true
+    }
+  ],
+  "integrity": "All sizes and SHA256 values matched GitHub release asset digests. OS signatures absent."
+}
