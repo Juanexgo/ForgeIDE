@@ -1,0 +1,7 @@
+{
+  "date": "2026-11-21T06:47:03.005773+00:00",
+  "provider": "OSV querybatch",
+  "scope": "engine/Cargo.lock registry packages, excludes vendored native libraries and legacy source",
+  "packages": 64,
+  "findings": []
+}

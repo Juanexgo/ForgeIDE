@@ -1,6 +1,12 @@
 name: Package preview (unsigned)
 on:
   workflow_dispatch:
+    inputs:
+      platform:
+        description: 'Target runner; all builds each OS natively'
+        type: choice
+        default: all
+        options: [all, macos-latest, ubuntu-24.04, windows-latest]
 permissions:
   contents: read
 jobs:
@@ -8,7 +14,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-latest, ubuntu-24.04, windows-latest]
+        os: ${{ fromJSON(inputs.platform == 'all' && '["macos-latest","ubuntu-24.04","windows-latest"]' || format('["{0}"]', inputs.platform)) }}
     runs-on: ${{ matrix.os }}
     timeout-minutes: 45
     env:

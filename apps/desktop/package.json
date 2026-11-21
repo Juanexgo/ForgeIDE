@@ -133,7 +133,8 @@
         "deb"
       ],
       "category": "Development",
-      "maintainer": "ForgeIDE contributors <107702735+Juanexgo@users.noreply.github.com>"
+      "maintainer": "ForgeIDE contributors <107702735+Juanexgo@users.noreply.github.com>",
+      "executableName": "forgeide"
     },
     "protocols": [
       {
