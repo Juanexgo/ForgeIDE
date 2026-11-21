@@ -29,6 +29,7 @@ export function splitDiff(text:string):GitDiff['hunks'] {
  for(const line of lines){if(line.startsWith('@@ ')){if(current)out.push({index:out.length,header:current.split('\n')[0],patch:current});current=line;}else if(current)current+=line;}
  if(current)out.push({index:out.length,header:current.split('\n')[0],patch:current});return out;
 }
+export function sameDirectory(a:string,b:string):boolean {const left=fs.statSync(a,{bigint:true}),right=fs.statSync(b,{bigint:true});if(!left.isDirectory()||!right.isDirectory())return false;if(left.ino!==0n&&right.ino!==0n)return left.dev===right.dev&&left.ino===right.ino;return path.relative(fs.realpathSync.native(a),fs.realpathSync.native(b))==='';}
 export class GitService {
  private trusted=false;
  private readonly hooks:string;
@@ -39,7 +40,7 @@ export class GitService {
  private async git(args:string[],input='',hooks=false):Promise<string>{const base=['--no-pager','--literal-pathspecs','-c','core.fsmonitor=false','-c','protocol.ext.allow=never','-c','protocol.file.allow=never'];if(!hooks)base.push('-c','core.hooksPath='+this.hooks);const r=await this.exec('git',[...base,'-C',this.root,...args],input,this.root,120000);if(r.code!==0)throw new Error(redact(r.err||r.out||'Git failed'));return r.out;}
  private async branch(name:string):Promise<void>{if(typeof name!=='string'||!name||name.length>240||name.startsWith('-')||name.includes('\0'))throw new Error('Invalid branch');await this.git(['check-ref-format','--branch',name]);}
  async snapshot():Promise<GitSnapshot>{
-  const top=(await this.git(['rev-parse','--show-toplevel'])).trim();if(path.relative(fs.realpathSync(top),fs.realpathSync(this.root))!=='')throw new Error('Open the repository root to manage its complete Git state');
+  const top=(await this.git(['rev-parse','--show-toplevel'])).trim();if(!sameDirectory(top,this.root))throw new Error('Open the repository root to manage its complete Git state');
   const [status,refs,log,remote,names,email]=await Promise.all([this.git(['status','--porcelain=v2','--branch','-z','--untracked-files=normal','--ignore-submodules=all']),this.git(['for-each-ref','--format=%(refname:short)%00%(objectname)%00%(HEAD)','refs/heads']),this.git(['log','-30','--format=%H%x00%h%x00%an%x00%aI%x00%s','-z']).catch(()=>''),this.git(['remote','-v']),this.git(['config','--get','user.name']).catch(()=>''),this.git(['config','--get','user.email']).catch(()=>'')]);
   const head=status.match(/# branch\.head ([^\0]+)/)?.[1]||'(unknown)';const ab=status.match(/# branch\.ab \+(\d+) -(\d+)/);
   const commits=log.split('\0'),history:GitSnapshot['history']=[];for(let i=0;i+4<commits.length;i+=5)history.push({id:commits[i],short:commits[i+1],author:commits[i+2],date:commits[i+3],subject:commits[i+4]});

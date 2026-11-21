@@ -1,5 +1,12 @@
 name: ForgeIDE checks
-on: [push, pull_request, workflow_dispatch]
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+concurrency:
+  group: checks-${{ github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: read
 jobs:
@@ -24,6 +31,9 @@ jobs:
       - run: corepack enable
       - run: corepack prepare yarn@1.22.22 --activate
       - run: yarn install --frozen-lockfile
+      - name: Dependency advisory gate
+        if: runner.os == 'Linux'
+        run: node scripts/audit-gate.mjs
       - run: yarn build:engine
       - run: yarn build:extension
       - run: yarn run typecheck
