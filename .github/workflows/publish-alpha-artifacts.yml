@@ -40,6 +40,6 @@ jobs:
       - name: Attach installers to a draft alpha release
         run: |
           if ! gh release view v0.9.0-alpha.1 >/dev/null 2>&1; then
-            gh release create v0.9.0-alpha.1 --draft --prerelease --target 8553f1e --title 'ForgeIDE 0.9.0 alpha 1' --notes 'Alpha installers without operating-system distribution signatures. See docs/ESTADO-COMPLETO.md for tested scope and known limits.'
+            gh release create v0.9.0-alpha.1 --draft --prerelease --target "$(gh api repos/Juanexgo/ForgeIDE/actions/runs/44879776714 --jq '.head_sha')" --title 'ForgeIDE 0.9.0 alpha 1' --notes 'Alpha installers without operating-system distribution signatures. See docs/ESTADO-COMPLETO.md for tested scope and known limits.'
           fi
           gh release upload v0.9.0-alpha.1 release-assets/* --clobber
