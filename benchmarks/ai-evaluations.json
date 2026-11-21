@@ -1,0 +1,50 @@
+{
+  "date": "2026-11-21T07:02:20.709261+00:00",
+  "status": "not_qualified",
+  "scope": "One synthetic add() correction via real ForgeImplement and Theia Ollama adapter. No four-role acceptance. No paid/external models used.",
+  "host": "Apple M2, 8 GiB",
+  "attempts": [
+    {
+      "model": "llama3.2:3b",
+      "status": "failed",
+      "reason": "Read tool invoked and review created, but after value was an incomplete return statement; Docker not ready during first verification attempt."
+    },
+    {
+      "model": "llama3.2:3b",
+      "status": "failed",
+      "reason": "HTTP request reached bounded model loading/generation timeout."
+    },
+    {
+      "model": "llama3.2:3b",
+      "status": "interrupted",
+      "reason": "Test cleanup stalled waiting for Docker Desktop startup; disposable evaluation process terminated, not counted as a pass."
+    },
+    {
+      "model": "llama3.2:3b",
+      "compute": "CPU 2 threads, isolated Ollama server",
+      "status": "failed",
+      "reason": "Request exceeded transport deadline with Docker running."
+    },
+    {
+      "model": "llama3.2:3b",
+      "compute": "GPU, isolated server, Docker stopped during generation",
+      "status": "failed",
+      "reason": "Model emitted text resembling a function call without invoking read_file; proposal was not accepted."
+    },
+    {
+      "model": "qwen3:4b",
+      "maxOutputTokens": 384,
+      "compute": "GPU, isolated server, Docker stopped during generation",
+      "status": "failed",
+      "reason": "Ollama stopped unexpectedly: length."
+    },
+    {
+      "model": "qwen3:4b",
+      "maxOutputTokens": 1024,
+      "compute": "GPU, isolated server, Docker stopped during generation",
+      "status": "failed",
+      "reason": "Ollama stopped unexpectedly: length."
+    }
+  ],
+  "safety": "No generated proposal was automatically applied. Model runners unloaded after each attempt; disposable server stopped. Existing user Ollama daemon retained. Docker restored, original 5120 MiB settings retained."
+}

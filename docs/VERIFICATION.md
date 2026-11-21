@@ -4,7 +4,9 @@
 
 ## Aprobado localmente
 
-- Compilación TypeScript y bundles browser/node/electron.
+- Compilación TypeScript y bundles browser/node/electron. Las 75 pruebas se repitieron bajo el Node del Electron distribuido, también sin fallos ni omisiones. El paquete aprobó transacciones Rust, worker de grafo con Python y PTY. El DMG HFS+ pasó hdiutil verify.
+- Los módulos de conexión reales de Theia y la fábrica Ollama decorada se cargaron juntos y conservaron identidad/modelo correctamente (comprobación adicional de integración de dependencias).
+- Auditoría OSV de engine/Cargo.lock: 64 paquetes de registro, cero hallazgos conocidos; excluye bibliotecas nativas, SO y el código legacy.
 - 75 pruebas de unidad/integración local, 75 aprobadas, cero omitidas. Incluyen grupos transaccionales, backend, límites de agentes, cancelación, graph multilenguaje/incremental, lifecycle GitHub, updates Ed25519 y regresiones de dependencias.
 - Dos pruebas reales de protocolo: TypeScript del plugin incluido (diagnósticos, completado, referencias, rename y codefix) y servidor DAP Node oficial 1.105.0 (breakpoints, stack, variables, evaluación y step). El asset standalone DAP está fijado por SHA256 en scripts/prepare-qa.mjs. No confundir con E2E del host gráfico de plugins.
 - Flujo Git remoto real con GitService en repositorio de prueba clonado: commit, rama, push/fetch/pull, crear/listar/cerrar PR #1 en Juanexgo/ForgeIDE. Rama eliminada, PR no fusionado. Cuenta gh existente reutilizada, desconexión/reconexión solo dentro de ForgeIDE.
@@ -15,7 +17,7 @@
 
 Actions: https://github.com/Juanexgo/ForgeIDE/actions
 
-macOS y Linux pasaron las dos primeras ejecuciones de checks. Windows encontró fallos reales de rutas cortas y fixtures SQLite; se corrigieron y se lanzó otra revisión. Consulte el resultado del commit exacto antes de declarar aprobado Windows.
+La ejecución final https://github.com/Juanexgo/ForgeIDE/actions/runs/44879776714, commit 8553f1e, aprobó macOS, Windows y Linux. Windows: 75 pruebas, tres crash recovery y dos de protocolos, todas aprobadas sin omisiones. La normalización de rutas corrigió el breakpoint; después se corrigió el cierre antes de eliminar fixtures. Los intentos anteriores fallidos permanecen visibles. El packaging de Linux AppImage/DEB aprobó en 44878027543; Windows NSIS y macOS ZIP aprobaron sus jobs de 44876977785.
 
 El benchmark de grafo genera 100/1000/10000 archivos, informa truncado, tres muestras y una secuencia incremental cold/no-op/edición. Es una prueba del analizador, no de latencia del editor, arranque completo o superioridad frente a competidores. Las métricas no equivalen a garantías de tiempo real.
 
@@ -24,6 +26,7 @@ El benchmark de grafo genera 100/1000/10000 archivos, informa truncado, tres mue
 - La herramienta visual sigue detectando bloqueo del Mac. No se certifica accesibilidad, instalación visual de extensiones ni recorrido completo de depuración desde botones.
 - Ollama local produjo una propuesta incompleta en un ensayo; los demás ensayos no aprobaron el recorrido completo. Hay límites de transporte y herramientas, pero eso no certifica calidad de los cuatro roles ni tareas autónomas generales.
 - Docker tuvo arranques/paradas bloqueados. No se borraron imágenes ni volúmenes del usuario. La configuración de memoria permanece en 5120 MiB. No presentar un daemon sin responder como resultado positivo.
-- SafeApply y perfiles con dependencias tienen cinco integraciones reales aprobadas de 0.8.1, no una repetición completa aprobada de 0.9.
+- Las cinco integraciones reales Docker se repitieron y aprobaron con 0.9: Node single-file, grupos Node/Python y dependencias públicas fijadas Node/Python. Comprobaron pruebas reales, proof, apply/revert y rechazo de inputs/locks posteriores.
+- El ensayo Qwen3:4b alcanzó el límite de generación tanto con 384 como con 1024 tokens; un ensayo Llama no leyó archivos y otro propuso un fragmento incompleto. Ninguno se cuenta como tarea IA aprobada. Docker se detuvo durante generación y se volvió a iniciar para el resto de pruebas; no se alteró la memoria de 5120 MiB.
 - No se dispone de certificado Developer ID de distribución ni certificado de firma Windows. La firma Ed25519 del feed autentica metadatos y hashes; no reemplaza firma/notarización del sistema operativo.
 - Fresh OAuth y token realmente expirado requieren un flujo real de autorización del usuario. Las pruebas deterministas de expiración no son esa aprobación.

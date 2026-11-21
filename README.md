@@ -44,7 +44,7 @@ node scripts/benchmark.mjs
 yarn package:mac
 ```
 
-El paquete macOS se escribe en dist-0.9/mac-arm64. Windows/Linux disponen de workflows, pendientes de ejecución real. La alpha carece de firma de distribución de Apple/Microsoft y notarización. Incluye comprobación de un feed Ed25519 y descarga manual verificada; no ejecuta actualizaciones automáticamente. El feed debe publicarse antes de que la comprobación remota tenga una versión disponible.
+El paquete macOS se escribe en dist-0.9/mac-arm64. macOS, Windows y Linux aprobaron la CI pública; los paquetes se generan nativamente en runners de cada sistema. Eso no sustituye pruebas gráficas de instalación y accesibilidad. La alpha carece de firma de distribución de Apple/Microsoft y notarización. Incluye comprobación de un feed Ed25519 y descarga manual verificada; no ejecuta actualizaciones automáticamente. El feed debe publicarse antes de que la comprobación remota tenga una versión disponible.
 
 ## Documentación
 
