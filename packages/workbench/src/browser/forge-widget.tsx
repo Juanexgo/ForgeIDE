@@ -23,14 +23,16 @@ export class ForgeWidget extends ReactWidget {
  @inject(ReviewResources) protected readonly memory!: ReviewResources;
  private session?: string; private root?: string;
  private tab: 'groups' | 'git' | 'review' | 'graph' | 'health' = 'groups'; private groupRevision=0; private pendingGroup?:string;
- showGit():void {this.tab='git';this.update();}
+ private visited = new Set<string>(['groups']);
+ private showTab(tab: typeof this.tab):void {this.tab=tab;this.visited.add(tab);this.update();}
+ showGit():void {this.showTab('git');}
  private proposals: Proposal[] = []; private graph?: Graph; private health?: Health;
  private image=''; private runs:RunReceipt[]=[]; private verifying?:string;
  private error = ''; private busy = false; private file = ''; private after = ''; private selected = '';
  @postConstruct() protected init(): void {
   this.id = ForgeWidget.ID; this.title.label = 'Forge Control'; this.title.caption = 'SafeApply · Graph · Diagnostics';
   this.title.iconClass = 'codicon codicon-shield'; this.title.closable = true;
-  this.addClass('forge-control'); this.node.tabIndex = 0;
+  this.addClass('forge-control'); this.node.tabIndex = 0; this.node.setAttribute('role','region'); this.node.setAttribute('aria-label','Forge Control');
   this.toDispose.push(this.workspace.onWorkspaceChanged(() => {this.session = undefined; this.root = undefined; this.graph = undefined; this.health = undefined; this.proposals = []; this.update();}));
   this.update();
  }
@@ -70,10 +72,10 @@ export class ForgeWidget extends ReactWidget {
   if(this.tab==='graph'&&this.selected&&this.graph){const parents=new Map<string,string[]>();for(const e of this.graph.edges){const a=parents.get(e.to)||[];a.push(e.from);parents.set(e.to,a);}const queue=[this.selected];impacted.add(this.selected);for(let i=0;i<queue.length;i++)for(const from of parents.get(queue[i])||[])if(!impacted.has(from)){impacted.add(from);queue.push(from);}}
   return <div className="forge-page">
    <header className="forge-hero"><span className="forge-eyebrow">FORGEIDE / CONTROL CENTER</span><h1>Construye con confianza.</h1><p>Revisa cambios, explora dependencias y consulta el estado real de tu proyecto.</p><span className="forge-badge">0.9 · Theia Preview</span></header>
-   <nav className="forge-tabs" aria-label="Herramientas Forge">{(['groups','git','review','graph','health'] as const).map(t => <button key={t} aria-pressed={this.tab===t} onClick={() => {this.tab=t; void this.refresh();}}>{t==='git'?'Git y GitHub':t==='groups'?'SafeApply':t==='review'?'Historial 0.7':t==='graph'?'Project Graph':'Diagnostics'}</button>)}<button disabled={this.busy} onClick={() => void this.refresh()}>{this.busy?'Consultando…':'Actualizar'}</button></nav>
+   <nav className="forge-tabs" aria-label="Herramientas Forge">{(['groups','git','review','graph','health'] as const).map(t => <button key={t} aria-pressed={this.tab===t} onClick={() => {this.showTab(t); void this.refresh();}}>{t==='git'?'Git y GitHub':t==='groups'?'SafeApply':t==='review'?'Historial 0.7':t==='graph'?'Project Graph':'Diagnostics'}</button>)}<button disabled={this.busy} onClick={() => void this.refresh()}>{this.busy?'Consultando…':'Actualizar'}</button></nav>
    {this.error && <p role="alert" className="forge-error">{this.error}</p>}
-   {this.tab==='git' && <GitPanel key={this.workspace.tryGetRoots()[0]?.resource.toString()||'none'} api={this.api} connect={()=>this.connect()} onProposal={id=>{this.pendingGroup=id;this.groupRevision++;this.tab='groups';this.update();}} openPatch={async(name,text)=>{const uri=new URI('forge-review:/git/'+Date.now()).withPath('/git/'+Date.now()+'/'+name);this.memory.add(uri,text);await this.editors.open(uri);}}/>}
-   {this.tab==='groups' && <GroupsPanel key={this.workspace.tryGetRoots()[0]?.resource.toString()||'none'} api={this.api} connect={()=>this.connect()} revision={this.groupRevision} initial={this.pendingGroup} diff={(g,c)=>this.diff({id:g.id,path:c.path,before:c.before||'',after:c.after||'',status:g.status,created:g.created,verification:'not_run'})}/>}
+   {this.visited.has('git') && <div hidden={this.tab!=='git'}><GitPanel key={this.workspace.tryGetRoots()[0]?.resource.toString()||'none'} api={this.api} connect={()=>this.connect()} onProposal={id=>{this.pendingGroup=id;this.groupRevision++;this.showTab('groups');}} openPatch={async(name,text)=>{const uri=new URI('forge-review:/git/'+Date.now()).withPath('/git/'+Date.now()+'/'+name);this.memory.add(uri,text);await this.editors.open(uri);}}/></div>}
+   {this.visited.has('groups') && <div hidden={this.tab!=='groups'}><GroupsPanel key={this.workspace.tryGetRoots()[0]?.resource.toString()||'none'} api={this.api} connect={()=>this.connect()} revision={this.groupRevision} initial={this.pendingGroup} diff={(g,c)=>this.diff({id:g.id,path:c.path,before:c.before||'',after:c.after||'',status:g.status,created:g.created,verification:'not_run'})}/></div>}
    {this.tab==='review' && <section><div className="forge-section-title"><h2>Cambios revisables</h2><span className="forge-muted">Persistentes · reversibles · controlados por ti</span></div>
     <p>Propón el contenido completo de un archivo existente. Revisa la comparación antes de aplicarlo. Puedes ejecutar pruebas Node en una copia filtrada, montada en modo solo lectura dentro de un contenedor sin red. El historial conserva el resultado y los archivos exactos probados.</p>
     <article className="forge-card"><h3>Verificación aislada · Node</h3><p>“Preparar runtime” descarga la imagen oficial Node 24. Las pruebas usan un snapshot sin dependencias, dotfiles ni claves conocidas; hasta 32 MiB. Solo disponen de /tmp para escribir, sin red, con límites de memoria y tiempo. Proyectos que requieren dependencias instaladas necesitan un perfil adicional.</p><button disabled={this.busy} onClick={() => void this.run(async s=>{this.image=await this.api.prepareRuntime(s);})}>Preparar runtime Node</button><label className="forge-label">Imagen inmutable<input value={this.image} placeholder="node@sha256:…" onChange={e=>{this.image=e.target.value;this.update();}} /></label></article>

@@ -1,0 +1,49 @@
+{
+  "model": "llama3.2:3b",
+  "turns": 1,
+  "toolCalls": [
+    {
+      "tool": "forge_read_file",
+      "args": {
+        "path": "main.mjs"
+      },
+      "result": {
+        "path": "main.mjs",
+        "content": "export function add(a,b) { return a - b; }\n"
+      }
+    },
+    {
+      "tool": "forge_read_file",
+      "args": {
+        "path": "main.mjs"
+      },
+      "result": {
+        "path": "main.mjs",
+        "content": "export function add(a,b) { return a - b; }\n"
+      }
+    },
+    {
+      "tool": "forge_draft_group",
+      "args": {
+        "title": "corrected main.mjs",
+        "changes": [
+          {
+            "after": "return a + b;",
+            "path": "main.mjs"
+          }
+        ]
+      },
+      "result": {
+        "id": "959221de-9c17-4056-995f-3557a505cec4",
+        "status": "review"
+      }
+    }
+  ],
+  "response": {
+    "text": "{\"name\": \"forge_safeapply_propose\", \"parameters\": {\"after\": \"return a + b;\"}}",
+    "usage": {
+      "input_tokens": 651,
+      "output_tokens": 24
+    }
+  }
+}
