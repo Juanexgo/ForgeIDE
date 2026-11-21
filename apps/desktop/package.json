@@ -6,7 +6,7 @@
   "productName": "ForgeIDE",
   "description": "ForgeIDE professional desktop IDE",
   "author": "ForgeIDE contributors",
-  "homepage": "https://theia-ide.org/",
+  "homepage": "https://github.com/Juanexgo/ForgeIDE",
   "main": "forge-main.cjs",
   "theia": {
     "target": "electron",
@@ -97,7 +97,10 @@
     "build:dev": "theia build --app-target=electron --mode development",
     "start": "theia start",
     "rebuild": "theia rebuild:electron --cacheRoot ../..",
-    "package:mac": "electron-builder --mac dir --arm64 --publish never"
+    "package:mac": "electron-builder --mac dir --arm64 --publish never",
+    "package:preview:mac": "electron-builder --mac zip --publish never",
+    "package:preview:win": "electron-builder --win nsis --publish never",
+    "package:preview:linux": "electron-builder --linux AppImage deb --publish never"
   },
   "build": {
     "appId": "dev.forgeide.desktop",
@@ -129,7 +132,8 @@
         "AppImage",
         "deb"
       ],
-      "category": "Development"
+      "category": "Development",
+      "maintainer": "ForgeIDE contributors <107702735+Juanexgo@users.noreply.github.com>"
     },
     "protocols": [
       {

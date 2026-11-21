@@ -10,6 +10,7 @@ jobs:
       matrix:
         os: [macos-latest, ubuntu-24.04, windows-latest]
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
     env:
       PUPPETEER_SKIP_DOWNLOAD: 'true'
       PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
@@ -32,13 +33,13 @@ jobs:
       - run: yarn test
       - name: Package macOS host architecture
         if: runner.os == 'macOS'
-        run: yarn workspace @forgeide/desktop exec electron-builder --mac zip --publish never
+        run: yarn workspace @forgeide/desktop run package:preview:mac
       - name: Package Windows host architecture
         if: runner.os == 'Windows'
-        run: yarn workspace @forgeide/desktop exec electron-builder --win nsis --publish never
+        run: yarn workspace @forgeide/desktop run package:preview:win
       - name: Package Linux host architecture
         if: runner.os == 'Linux'
-        run: yarn workspace @forgeide/desktop exec electron-builder --linux AppImage deb --publish never
+        run: yarn workspace @forgeide/desktop run package:preview:linux
       - uses: actions/upload-artifact@v4
         with:
           name: unsigned-preview-${{ matrix.os }}

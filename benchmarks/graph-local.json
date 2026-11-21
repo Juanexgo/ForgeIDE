@@ -1,53 +1,119 @@
 {
-  "date": "2026-11-21T00:06:38.853Z",
+  "date": "2026-11-21T06:40:08.984Z",
   "node": "v24.13.1",
   "platform": "darwin",
   "arch": "arm64",
   "cpu": "Apple M2",
   "ramGB": 8,
-  "scope": "Static JS/TS graph only; generated fixtures; 3 warm-process samples. No editor/input/IDE startup benchmark or competitor comparison.",
+  "scope": "Static JS/TS graph only; incremental samples use a persistent index; generated fixtures; 3 warm-process samples. No editor/input/IDE startup benchmark or competitor comparison.",
   "results": [
     {
+      "incremental": {
+        "cold": {
+          "parsedFiles": 100,
+          "reusedFiles": 0,
+          "removedFiles": 0
+        },
+        "unchanged": {
+          "parsedFiles": 0,
+          "reusedFiles": 100,
+          "removedFiles": 0
+        },
+        "edited": {
+          "parsedFiles": 1,
+          "reusedFiles": 99,
+          "removedFiles": 0
+        },
+        "elapsedMs": {
+          "cold": 19,
+          "unchanged": 3,
+          "edited": 6
+        }
+      },
       "fixtureFiles": 100,
       "resolvedModules": 100,
       "edges": 99,
       "truncated": false,
       "samples": [
-        94.93570899999986,
-        154.79220799999985,
-        221.7272499999999
+        17.744665999999995,
+        29.04008299999998,
+        48.67958299999998
       ],
-      "p50": 154.79220799999985,
-      "p95": 221.7272499999999,
-      "rssMB": 112
+      "p50": 29.04008299999998,
+      "p95": 48.67958299999998,
+      "rssMB": 123
     },
     {
+      "incremental": {
+        "cold": {
+          "parsedFiles": 1000,
+          "reusedFiles": 0,
+          "removedFiles": 0
+        },
+        "unchanged": {
+          "parsedFiles": 0,
+          "reusedFiles": 1000,
+          "removedFiles": 0
+        },
+        "edited": {
+          "parsedFiles": 1,
+          "reusedFiles": 999,
+          "removedFiles": 0
+        },
+        "elapsedMs": {
+          "cold": 148,
+          "unchanged": 30,
+          "edited": 32
+        }
+      },
       "fixtureFiles": 1000,
       "resolvedModules": 1000,
       "edges": 999,
       "truncated": false,
       "samples": [
-        1065.5365829999996,
-        1601.3739999999998,
-        1685.1658749999997
+        106.72512500000005,
+        131.950958,
+        137.44229099999995
       ],
-      "p50": 1601.3739999999998,
-      "p95": 1685.1658749999997,
-      "rssMB": 66
+      "p50": 131.950958,
+      "p95": 137.44229099999995,
+      "rssMB": 152
     },
     {
+      "incremental": {
+        "cold": {
+          "parsedFiles": 1000,
+          "reusedFiles": 0,
+          "removedFiles": 0
+        },
+        "unchanged": {
+          "parsedFiles": 0,
+          "reusedFiles": 1000,
+          "removedFiles": 0
+        },
+        "edited": {
+          "parsedFiles": 1,
+          "reusedFiles": 999,
+          "removedFiles": 0
+        },
+        "elapsedMs": {
+          "cold": 192,
+          "unchanged": 86,
+          "edited": 70
+        }
+      },
       "fixtureFiles": 10000,
       "resolvedModules": 1000,
       "edges": 996,
       "truncated": true,
       "samples": [
-        486.9837919999991,
-        604.4474589999991,
-        614.0008330000001
+        156.79079199999978,
+        170.02870900000016,
+        692.3378329999996
       ],
-      "p50": 604.4474589999991,
-      "p95": 614.0008330000001,
-      "rssMB": 89
+      "p50": 170.02870900000016,
+      "p95": 692.3378329999996,
+      "rssMB": 141
     }
   ]
 }
