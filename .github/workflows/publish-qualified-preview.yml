@@ -1,0 +1,73 @@
+name: Collect qualified preview
+on:
+  workflow_dispatch:
+    inputs:
+      checks_run:
+        description: Successful three-platform checks run ID
+        required: true
+      package_run:
+        description: Successful all-platform package run ID at the same commit
+        required: true
+permissions:
+  contents: write
+  actions: read
+jobs:
+  collect:
+    runs-on: macos-latest
+    timeout-minutes: 20
+    env:
+      GH_TOKEN: ${{ github.token }}
+      CHECKS_RUN: ${{ inputs.checks_run }}
+      PACKAGE_RUN: ${{ inputs.package_run }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Require matching successful provenance
+        run: |
+          node --input-type=module <<'JS'
+          import {execFileSync} from 'node:child_process';
+          import fs from 'node:fs';
+          const api=id=>JSON.parse(execFileSync('gh',['api','repos/'+process.env.GITHUB_REPOSITORY+'/actions/runs/'+id],{encoding:'utf8'}));
+          for(const id of [process.env.CHECKS_RUN,process.env.PACKAGE_RUN])if(!/^\d+$/.test(id))throw Error('Invalid run ID');
+          const checks=api(process.env.CHECKS_RUN),pack=api(process.env.PACKAGE_RUN);
+          for(const run of [checks,pack])if(run.conclusion!=='success'||run.head_sha!==process.env.GITHUB_SHA||run.head_repository.full_name!==process.env.GITHUB_REPOSITORY)throw Error('Run must succeed at this exact repository commit');
+          if(checks.path!=='.github/workflows/checks.yml'||pack.path!=='.github/workflows/package-preview.yml')throw Error('Unexpected workflow');
+          const jobs=JSON.parse(execFileSync('gh',['api','repos/'+process.env.GITHUB_REPOSITORY+'/actions/runs/'+process.env.PACKAGE_RUN+'/jobs'],{encoding:'utf8'})).jobs;
+          for(const os of ['macos-latest','windows-latest','ubuntu-24.04'])if(!jobs.some(j=>j.name.includes(os)&&j.conclusion==='success'))throw Error('Missing qualified package '+os);
+          fs.writeFileSync('provenance.json',JSON.stringify({commit:process.env.GITHUB_SHA,checks:checks.id,packages:pack.id}));
+          JS
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: unsigned-preview-*
+          run-id: ${{ inputs.package_run }}
+          github-token: ${{ github.token }}
+          path: incoming
+      - name: Create macOS disk image
+        run: |
+          zipfile=$(find incoming/unsigned-preview-macos-latest -maxdepth 1 -name '*.zip' -print -quit)
+          test -n "$zipfile"
+          ditto -x -k "$zipfile" staging
+          test -d staging/ForgeIDE.app
+          test "$(lipo -archs staging/ForgeIDE.app/Contents/MacOS/ForgeIDE)" = arm64
+          mkdir release-assets
+          hdiutil create -volname ForgeIDE -srcfolder staging -fs HFS+ -format UDZO release-assets/mac.dmg
+          hdiutil verify release-assets/mac.dmg
+      - name: Hash installers and create draft release
+        run: |
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';import path from 'node:path';import {createHash} from 'node:crypto';import {execFileSync} from 'node:child_process';
+          const version=JSON.parse(fs.readFileSync('package.json')).version;
+          if(!/^\d+\.\d+\.\d+-alpha\.\d+$/.test(version))throw Error('Only alpha versions supported');
+          const assets=[];
+          for(const [dir,platform,arch,ext] of [['release-assets','macOS','arm64','dmg'],['incoming/unsigned-preview-windows-latest','Windows','x64','exe'],['incoming/unsigned-preview-ubuntu-24.04','Linux','x64','deb'],['incoming/unsigned-preview-ubuntu-24.04','Linux','x64','AppImage']]){
+            const candidates=fs.readdirSync(dir).filter(n=>n.endsWith('.'+ext));if(candidates.length!==1)throw Error('Expected exactly one '+ext);
+            const input=path.join(dir,candidates[0]),name=`ForgeIDE-${version}-${platform}-${arch}.${ext}`,output='release-assets/'+name,data=fs.readFileSync(input);
+            if(ext==='exe'&&data.subarray(0,2).toString()!=='MZ'||ext==='deb'&&data.subarray(0,8).toString()!=='!<arch>\n'||ext==='AppImage'&&!data.subarray(0,4).equals(Buffer.from([127,69,76,70])))throw Error('Invalid installer format');
+            fs.renameSync(input,output);assets.push({name,platform,arch,kind:ext,bytes:data.length,sha256:createHash('sha256').update(data).digest('hex'),unsigned:true});
+          }
+          const provenance=JSON.parse(fs.readFileSync('provenance.json'));
+          fs.writeFileSync('release-assets/native-installers.json',JSON.stringify({version,...provenance,assets},null,2)+'\n');
+          const tag='v'+version;
+          try{execFileSync('gh',['release','view',tag],{stdio:'ignore'});throw Error('Release already exists; refuse replacement');}catch(e){if(e.message==='Release already exists; refuse replacement')throw e;}
+          execFileSync('gh',['release','create',tag,'--draft','--prerelease','--target',provenance.commit,'--title','ForgeIDE '+version,'--notes','Alpha without Apple/Windows distribution signatures. See docs/ESTADO-COMPLETO.md for current acceptance and limitations.']);
+          execFileSync('gh',['release','upload',tag,...fs.readdirSync('release-assets').map(n=>'release-assets/'+n)]);
+          JS

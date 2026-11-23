@@ -1,6 +1,6 @@
 {
   "name": "forgeide",
-  "version": "0.9.0-alpha.1",
+  "version": "0.9.1-alpha.1",
   "private": true,
   "license": "MIT",
   "engines": {
@@ -27,14 +27,18 @@
     "test:dependencies": "node --test tests/integration/dependencies.test.cjs",
     "test:ollama": "node --test tests/integration/ollama.test.cjs",
     "test:protocol": "node --test tests/integration/language.test.cjs tests/integration/dap.test.cjs",
-    "prepare:qa": "node scripts/prepare-qa.mjs"
+    "prepare:qa": "node scripts/prepare-qa.mjs",
+    "test:agents": "node --test tests/integration/agents-matrix.test.cjs",
+    "benchmark:search": "node scripts/compare-search.mjs"
   },
   "devDependencies": {
     "@theia/cli": "1.77.0",
-    "typescript": "5.8.3",
     "@types/node": "24.13.0",
     "@types/react": "19.3.0",
-    "@types/react-dom": "19.3.0"
+    "@types/react-dom": "19.3.0",
+    "axe-core": "4.14.1",
+    "jsdom": "27.2.0",
+    "typescript": "5.8.3"
   },
   "theiaPluginsDir": "plugins",
   "theiaPlugins": {

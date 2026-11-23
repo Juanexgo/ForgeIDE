@@ -1,0 +1,81 @@
+name: Signed distribution (requires owner certificates)
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  package:
+    environment: distribution-signing
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
+    env:
+      PUPPETEER_SKIP_DOWNLOAD: 'true'
+      PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Reject missing distribution identities before building
+        env:
+          MAC_READY: ${{ secrets.MAC_CSC_LINK != '' && secrets.MAC_CSC_KEY_PASSWORD != '' && vars.MAC_SIGNING_IDENTITY != '' && secrets.APPLE_ID != '' && secrets.APPLE_APP_SPECIFIC_PASSWORD != '' && secrets.APPLE_TEAM_ID != '' }}
+          WIN_READY: ${{ secrets.WIN_CSC_LINK != '' && secrets.WIN_CSC_KEY_PASSWORD != '' && vars.WIN_PUBLISHER_NAME != '' }}
+        run: |
+          node -e "if ((process.platform === 'darwin' ? process.env.MAC_READY : process.env.WIN_READY) !== 'true') throw Error('Distribution certificates and notarization credentials must be configured by the owner')"
+      - uses: dtolnay/rust-toolchain@1.85.1
+      - run: corepack enable
+      - run: corepack prepare yarn@1.22.22 --activate
+      - run: yarn install --frozen-lockfile
+      - run: yarn download:plugins
+      - run: yarn rebuild
+      - run: yarn build
+      - run: yarn test
+      - name: Sign and notarize macOS
+        if: runner.os == 'macOS'
+        env:
+          CSC_LINK: ${{ secrets.MAC_CSC_LINK }}
+          CSC_KEY_PASSWORD: ${{ secrets.MAC_CSC_KEY_PASSWORD }}
+          MAC_SIGNING_IDENTITY: ${{ vars.MAC_SIGNING_IDENTITY }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+        run: yarn workspace @forgeide/desktop run package:signed
+      - name: Verify macOS distribution signature and notarization ticket
+        if: runner.os == 'macOS'
+        shell: bash
+        run: |
+          app=$(find dist-signed -maxdepth 2 -name ForgeIDE.app -print -quit)
+          test -n "$app"
+          codesign --verify --deep --strict "$app"
+          codesign -d --verbose=4 "$app" 2>&1 | grep -q 'Authority=Developer ID Application:'
+          spctl --assess --type execute "$app"
+          xcrun stapler validate "$app"
+      - name: Sign Windows installer
+        if: runner.os == 'Windows'
+        env:
+          WIN_CSC_LINK: ${{ secrets.WIN_CSC_LINK }}
+          WIN_CSC_KEY_PASSWORD: ${{ secrets.WIN_CSC_KEY_PASSWORD }}
+          WIN_PUBLISHER_NAME: ${{ vars.WIN_PUBLISHER_NAME }}
+        run: yarn workspace @forgeide/desktop run package:signed
+      - name: Verify Authenticode on app and installer
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $files = @(Get-ChildItem dist-signed -Filter *.exe) + @(Get-ChildItem dist-signed/win-unpacked -Filter ForgeIDE.exe)
+          if ($files.Count -lt 2) { throw 'Expected app and installer executables' }
+          foreach ($file in $files) {
+            $signature = Get-AuthenticodeSignature $file.FullName
+            if ($signature.Status -ne 'Valid') { throw "Authenticode verification failed: $($file.Name)" }
+          }
+      - uses: actions/upload-artifact@v4
+        with:
+          name: verified-signed-${{ matrix.os }}
+          path: |
+            dist-signed/*.dmg
+            dist-signed/*.zip
+            dist-signed/*.exe
+          if-no-files-found: error

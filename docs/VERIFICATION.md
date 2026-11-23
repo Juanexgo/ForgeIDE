@@ -34,3 +34,16 @@ El benchmark de grafo genera 100/1000/10000 archivos, informa truncado, tres mue
 ## Publicación y actualizaciones
 
 La release v0.9.0-alpha.1 contiene DMG macOS ARM64, NSIS Windows x64, AppImage/DEB Linux x64 y código. Los cuatro tamaños y SHA256 se compararon con los digests devueltos por GitHub. El feed público updates-alpha pasó la comprobación real HTTPS, firma Ed25519 y versiones con UpdateService de producción: 0.8.1 vio una actualización y 0.9.0 quedó al día. No se ejecutaron instaladores durante esa prueba. Ver benchmarks/update-public-feed.json y los límites de firma del SO arriba.
+
+## Revisión 0.9.1 — 23 de noviembre de 2026
+
+- `yarn build:extension` y `yarn typecheck`: aprobados.
+- `yarn test`: 91 pruebas aprobadas, cero fallos/omisiones.
+- `yarn test:protocol`: dos protocolos reales aprobados (TypeScript y Node DAP).
+- `node scripts/audit-gate.mjs`: cero alertas NPM conocidas; SBOM de lockfile regenerado.
+- `yarn test:agents`: cuatro fixtures con el modelo real Qwen3 Instruct, contratos de herramientas compartidos y Docker. Consulte el recibo JSON para la ejecución exacta; la prueba de mutación de ForgeTests debe fallar deliberadamente.
+- `yarn benchmark:search`: comparación de los motores CLI incluidos en las tres aplicaciones; no se presenta como benchmark del IDE completo.
+- `tests/accessibility.test.cjs`: seis componentes iniciales pasan comprobaciones semánticas axe. No certifica contraste, interacciones, lector de pantalla, IME ni accesibilidad del shell Electron.
+- `tests/signing.test.cjs`: configuración y rechazo de credenciales ausentes. No equivale a firmar una aplicación.
+
+Para publicar nuevos instaladores, ejecutar `checks.yml` y `package-preview.yml` en el mismo commit. `publish-qualified-preview.yml` comprueba procedencia y exige los tres sistemas; genera una release draft sin firma de distribución. Una ejecución previa de otra versión no es suficiente.

@@ -1,0 +1,355 @@
+{
+  "date": "2026-11-23T22:29:31.511Z",
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "modelDetails": {
+    "parent_model": "",
+    "format": "gguf",
+    "family": "qwen3",
+    "families": [
+      "qwen3"
+    ],
+    "parameter_size": "4.0B",
+    "quantization_level": "Q4_K_M"
+  },
+  "modelArchitecture": "qwen3",
+  "scope": "Four deterministic synthetic role fixtures using the actual Forge agent, shared production tool definitions, real Theia Ollama adapter and backend. Driver reviews, verifies, applies and reverts after generation; no chat UI or autonomous application. No general model-quality or security certification.",
+  "results": [
+    {
+      "id": "clamp-feature",
+      "role": "ForgeImplement",
+      "status": "passed",
+      "toolCalls": [
+        {
+          "tool": "forge_read_file",
+          "args": {
+            "path": "main.mjs"
+          },
+          "result": {
+            "path": "main.mjs",
+            "content": "export function clamp(value, lower, upper) { return value; }\n"
+          }
+        },
+        {
+          "tool": "forge_read_file",
+          "args": {
+            "path": "main.test.mjs"
+          },
+          "result": {
+            "path": "main.test.mjs",
+            "content": "import {test} from 'node:test';import assert from 'node:assert/strict';\nimport {clamp} from './main.mjs';test('lower bound',()=>assert.equal(clamp(-5,0,10),0));test('upper bound',()=>assert.equal(clamp(20,0,10),10));test('inside',()=>assert.equal(clamp(4,0,10),4));\n"
+          }
+        },
+        {
+          "tool": "forge_safeapply_propose",
+          "args": {
+            "path": "main.mjs",
+            "after": "export function clamp(value, lower, upper) {\n  if (value < lower) {\n    return lower;\n  }\n  if (value > upper) {\n    return upper;\n  }\n  return value;\n}\n"
+          },
+          "result": {
+            "id": "9abe7d2b-f099-4b03-82ed-8e926f92759d",
+            "path": "main.mjs",
+            "status": "review",
+            "verification": "not_run",
+            "next": "Open Forge Control to review. No file was changed."
+          }
+        }
+      ],
+      "response": {
+        "text": "Propuesta de revisión creada: 9abe7d2b-f099-4b03-82ed-8e926f92759d. No aplicada ni verificada. Revisa los cambios en Forge Control antes de ejecutar pruebas o aplicarlos."
+      },
+      "verification": {
+        "id": "e36abf31-0c5c-4df6-80f0-3877a31b04c9",
+        "proposalId": "9abe7d2b-f099-4b03-82ed-8e926f92759d",
+        "proof": "648273c927fe82dd937fa8a1558b81b87c2c7ec1e1ff51837c53272a8513f0cb",
+        "created": "2026-11-23T22:32:55.449Z",
+        "status": "passed",
+        "image": "node@sha256:116b800c3754b440ee0aa3ed2f20f5bf3d99a554bfd9adeea09ea8017f6e85f5",
+        "command": [
+          "node",
+          "--test",
+          "--test-reporter=tap"
+        ],
+        "profile": "node",
+        "snapshot": "02a950f290596887b09a7bb13dd36878863a6589124c74369c9f0d54958b7fca",
+        "files": 2,
+        "bytes": 419,
+        "exitCode": 0,
+        "elapsedMs": 5749,
+        "output": "TAP version 13\n# Subtest: lower bound\nok 1 - lower bound\n  ---\n  duration_ms: 8.26\n  type: 'test'\n  ...\n# Subtest: upper bound\nok 2 - upper bound\n  ---\n  duration_ms: 0.241458\n  type: 'test'\n  ...\n# Subtest: inside\nok 3 - inside\n  ---\n  duration_ms: 0.472708\n  type: 'test'\n  ...\n1..3\n# tests 3\n# suites 0\n# pass 3\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 373.563542\n",
+        "workdir": "/workspace",
+        "startupMs": 1420,
+        "executionMs": 2513
+      },
+      "appliedThenReverted": true
+    },
+    {
+      "id": "addition-regression",
+      "role": "ForgeFix",
+      "status": "passed",
+      "toolCalls": [
+        {
+          "tool": "forge_read_file",
+          "args": {
+            "path": "main.mjs"
+          },
+          "result": {
+            "path": "main.mjs",
+            "content": "export function add(a,b) { return a-b; }\n"
+          }
+        },
+        {
+          "tool": "forge_read_file",
+          "args": {
+            "path": "main.test.mjs"
+          },
+          "result": {
+            "path": "main.test.mjs",
+            "content": "import {test} from 'node:test';import assert from 'node:assert/strict';\nimport {add} from './main.mjs';test('positive',()=>assert.equal(add(2,3),5));test('negative',()=>assert.equal(add(-2,3),1));test('zero',()=>assert.equal(add(0,0),0));\n"
+          }
+        },
+        {
+          "tool": "forge_safeapply_propose",
+          "args": {
+            "path": "main.mjs",
+            "after": "export function add(a,b) { return a + b; }\n"
+          },
+          "result": {
+            "id": "bcf50961-f53f-48f4-9ce4-678e8ff0c9b2",
+            "path": "main.mjs",
+            "status": "review",
+            "verification": "not_run",
+            "next": "Open Forge Control to review. No file was changed."
+          }
+        }
+      ],
+      "response": {
+        "text": "Propuesta de revisión creada: bcf50961-f53f-48f4-9ce4-678e8ff0c9b2. No aplicada ni verificada. Revisa los cambios en Forge Control antes de ejecutar pruebas o aplicarlos."
+      },
+      "verification": {
+        "id": "56548eb6-babe-4f8c-acc7-5aa22ed84b13",
+        "proposalId": "bcf50961-f53f-48f4-9ce4-678e8ff0c9b2",
+        "proof": "b4d7f6d0736e7e9fb7174ea38d973565492bff42fbafe65bb0f9ca368ed21148",
+        "created": "2026-11-23T22:33:01.846Z",
+        "status": "passed",
+        "image": "node@sha256:116b800c3754b440ee0aa3ed2f20f5bf3d99a554bfd9adeea09ea8017f6e85f5",
+        "command": [
+          "node",
+          "--test",
+          "--test-reporter=tap"
+        ],
+        "profile": "node",
+        "snapshot": "0263a39a7e968d25a52ebd9c915b49b2bbc2c96733821912fc337f18a6e85e00",
+        "files": 2,
+        "bytes": 282,
+        "exitCode": 0,
+        "elapsedMs": 2517,
+        "output": "TAP version 13\n# Subtest: positive\nok 1 - positive\n  ---\n  duration_ms: 7.297583\n  type: 'test'\n  ...\n# Subtest: negative\nok 2 - negative\n  ---\n  duration_ms: 0.471958\n  type: 'test'\n  ...\n# Subtest: zero\nok 3 - zero\n  ---\n  duration_ms: 1.139959\n  type: 'test'\n  ...\n1..3\n# tests 3\n# suites 0\n# pass 3\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 334.791959\n",
+        "workdir": "/workspace",
+        "startupMs": 919,
+        "executionMs": 930
+      },
+      "appliedThenReverted": true
+    },
+    {
+      "id": "addition-tests",
+      "role": "ForgeTests",
+      "status": "passed",
+      "toolCalls": [
+        {
+          "tool": "forge_read_file",
+          "args": {
+            "path": "main.mjs"
+          },
+          "result": {
+            "path": "main.mjs",
+            "content": "export function add(a,b) { return a+b; }\n"
+          }
+        },
+        {
+          "tool": "forge_read_file",
+          "args": {
+            "path": "main.test.mjs"
+          },
+          "result": {
+            "path": "main.test.mjs",
+            "content": "import {test} from 'node:test';import assert from 'node:assert/strict';\nimport {add} from './main.mjs';test('positive',()=>assert.equal(add(2,3),5));\n"
+          }
+        },
+        {
+          "tool": "forge_safeapply_propose",
+          "args": {
+            "after": "import {test} from 'node:test';\nimport assert from 'node:assert/strict';\nimport {add} from './main.mjs';\n\ntest('positive', () => {\n  assert.equal(add(2, 3), 5);\n});\n\ntest('negative first argument', () => {\n  assert.equal(add(-1, 2), 1);\n});\n\ntest('zero first argument', () => {\n  assert.equal(add(0, 5), 5);\n});",
+            "path": "main.test.mjs"
+          },
+          "result": {
+            "id": "40bc0f08-74d6-44ac-a9a3-8b6f7dfe820a",
+            "path": "main.test.mjs",
+            "status": "review",
+            "verification": "not_run",
+            "next": "Open Forge Control to review. No file was changed."
+          }
+        }
+      ],
+      "response": {
+        "text": "Propuesta de revisión creada: 40bc0f08-74d6-44ac-a9a3-8b6f7dfe820a. No aplicada ni verificada. Revisa los cambios en Forge Control antes de ejecutar pruebas o aplicarlos."
+      },
+      "verification": {
+        "id": "a689cee4-8ba1-4e44-9a38-d0a4513c8193",
+        "proposalId": "40bc0f08-74d6-44ac-a9a3-8b6f7dfe820a",
+        "proof": "c08ab0b19237b4f99de3a7a699f46182a6ae3725de53612a39d9716ec47ba397",
+        "created": "2026-11-23T22:33:04.737Z",
+        "status": "passed",
+        "image": "node@sha256:116b800c3754b440ee0aa3ed2f20f5bf3d99a554bfd9adeea09ea8017f6e85f5",
+        "command": [
+          "node",
+          "--test",
+          "--test-reporter=tap"
+        ],
+        "profile": "node",
+        "snapshot": "6b6432d8b21c5e118bf2c90862d2403bab366c636575d0530cecc1ed3426f2a0",
+        "files": 2,
+        "bytes": 352,
+        "exitCode": 0,
+        "elapsedMs": 2996,
+        "output": "TAP version 13\n# Subtest: positive\nok 1 - positive\n  ---\n  duration_ms: 1.322\n  type: 'test'\n  ...\n# Subtest: negative first argument\nok 2 - negative first argument\n  ---\n  duration_ms: 0.493416\n  type: 'test'\n  ...\n# Subtest: zero first argument\nok 3 - zero first argument\n  ---\n  duration_ms: 0.168083\n  type: 'test'\n  ...\n1..3\n# tests 3\n# suites 0\n# pass 3\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 449.119084\n",
+        "workdir": "/workspace",
+        "startupMs": 1153,
+        "executionMs": 1014
+      },
+      "mutation": {
+        "id": "7e6469d3-003a-473f-a8c5-f7e14bc4ef44",
+        "proposalId": "4b358a38-5980-43f8-a9d9-521b5da27676",
+        "proof": "c3a078effcff526d6e686c898da09d2468c03e7773ac63395a7c30a1daef2478",
+        "created": "2026-11-23T22:33:07.798Z",
+        "status": "failed",
+        "image": "node@sha256:116b800c3754b440ee0aa3ed2f20f5bf3d99a554bfd9adeea09ea8017f6e85f5",
+        "command": [
+          "node",
+          "--test",
+          "--test-reporter=tap"
+        ],
+        "profile": "node",
+        "snapshot": "d4364388a185b3c1823c36fc19d7d51cebc32231caa1b51cc78f1e7c19b5b63d",
+        "files": 2,
+        "bytes": 372,
+        "exitCode": 1,
+        "elapsedMs": 3155,
+        "output": "TAP version 13\n# Subtest: positive\nok 1 - positive\n  ---\n  duration_ms: 1.260459\n  type: 'test'\n  ...\n# Subtest: negative first argument\nnot ok 2 - negative first argument\n  ---\n  duration_ms: 7.145209\n  type: 'test'\n  location: '/workspace/main.test.mjs:9:1'\n  failureType: 'testCodeFailure'\n  error: |-\n    Expected values to be strictly equal:\n    \n    999 !== 1\n    \n  code: 'ERR_ASSERTION'\n  name: 'AssertionError'\n  expected: 1\n  actual: 999\n  operator: 'strictEqual'\n  stack: |-\n    TestContext.<anonymous> (file:///workspace/main.test.mjs:10:10)\n    Test.runInAsyncScope (node:async_hooks:227:14)\n    Test.run (node:internal/test_runner/test:1402:25)\n    Test.processPendingSubtests (node:internal/test_runner/test:974:18)\n    Test.postRun (node:internal/test_runner/test:1542:19)\n    Test.run (node:internal/test_runner/test:1467:12)\n    async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)\n  ...\n# Subtest: zero first argument\nnot ok 3 - zero first argument\n  ---\n  duration_ms: 3.230042\n  type: 'test'\n  location: '/workspace/main.test.mjs:13:1'\n  failureType: 'testCodeFailure'\n  error: |-\n    Expected values to be strictly equal:\n    \n    999 !== 5\n    \n  code: 'ERR_ASSERTION'\n  name: 'AssertionError'\n  expected: 5\n  actual: 999\n  operator: 'strictEqual'\n  stack: |-\n    TestContext.<anonymous> (file:///workspace/main.test.mjs:14:10)\n    Test.runInAsyncScope (node:async_hooks:227:14)\n    Test.run (node:internal/test_runner/test:1402:25)\n    Test.processPendingSubtests (node:internal/test_runner/test:974:18)\n    Test.postRun (node:internal/test_runner/test:1542:19)\n    Test.run (node:internal/test_runner/test:1467:12)\n    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)\n  ...\n1..3\n# tests 3\n# suites 0\n# pass 1\n# fail 2\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 1219.536876\n",
+        "workdir": "/workspace",
+        "startupMs": 907,
+        "executionMs": 1609
+      },
+      "appliedThenReverted": true
+    },
+    {
+      "id": "remove-code-evaluation",
+      "role": "ForgeSecurity",
+      "status": "passed",
+      "toolCalls": [
+        {
+          "tool": "forge_read_file",
+          "args": {
+            "path": "main.mjs"
+          },
+          "result": {
+            "path": "main.mjs",
+            "content": "export function parseConfig(text) { return (new Function('return ('+text+')'))(); }\n"
+          }
+        },
+        {
+          "tool": "forge_read_file",
+          "args": {
+            "path": "main.test.mjs"
+          },
+          "result": {
+            "path": "main.test.mjs",
+            "content": "import {test} from 'node:test';import assert from 'node:assert/strict';\nimport {parseConfig} from './main.mjs';test('JSON object',()=>assert.deepEqual(parseConfig('{\"ok\":true}'),{ok:true}));test('reject executable expressions',()=>{delete globalThis.forgeUnsafe;assert.throws(()=>parseConfig('(globalThis.forgeUnsafe=1,{ok:true})'));assert.equal(globalThis.forgeUnsafe,undefined);});test('invalid JSON',()=>assert.throws(()=>parseConfig('not json')));\n"
+          }
+        },
+        {
+          "tool": "forge_project_graph",
+          "args": {
+            "paths": [
+              "main.mjs"
+            ]
+          },
+          "result": {
+            "nodes": [
+              "main.mjs",
+              "main.test.mjs"
+            ],
+            "edges": [
+              {
+                "from": "main.test.mjs",
+                "to": "main.mjs"
+              }
+            ],
+            "unresolved": 2,
+            "cycles": [],
+            "nodeDetails": {
+              "main.mjs": {
+                "kind": "file",
+                "path": "main.mjs",
+                "language": "typescript"
+              },
+              "main.test.mjs": {
+                "kind": "file",
+                "path": "main.test.mjs",
+                "language": "typescript"
+              }
+            },
+            "warnings": [],
+            "truncated": false,
+            "elapsedMs": 225,
+            "incremental": {
+              "parsedFiles": 2,
+              "reusedFiles": 0,
+              "removedFiles": 0
+            }
+          }
+        },
+        {
+          "tool": "forge_safeapply_propose",
+          "args": {
+            "path": "main.mjs",
+            "after": "export function parseConfig(text) {\n  try {\n    return JSON.parse(text);\n  } catch (error) {\n    throw new Error(`Invalid JSON: ${error.message}`);\n  }\n}\n"
+          },
+          "result": {
+            "id": "5e96e1fc-8ec1-4d0f-9f20-0c96b52331ad",
+            "path": "main.mjs",
+            "status": "review",
+            "verification": "not_run",
+            "next": "Open Forge Control to review. No file was changed."
+          }
+        }
+      ],
+      "response": {
+        "text": "Propuesta de revisión creada: 5e96e1fc-8ec1-4d0f-9f20-0c96b52331ad. No aplicada ni verificada. Revisa los cambios en Forge Control antes de ejecutar pruebas o aplicarlos."
+      },
+      "verification": {
+        "id": "64f2670e-e79e-4b17-a4c0-66177335a66f",
+        "proposalId": "5e96e1fc-8ec1-4d0f-9f20-0c96b52331ad",
+        "proof": "8797b1e34184344a219a4f1b9aec4a795f95ddc41f47d6c35d275c7e7a4ce813",
+        "created": "2026-11-23T22:33:11.104Z",
+        "status": "passed",
+        "image": "node@sha256:116b800c3754b440ee0aa3ed2f20f5bf3d99a554bfd9adeea09ea8017f6e85f5",
+        "command": [
+          "node",
+          "--test",
+          "--test-reporter=tap"
+        ],
+        "profile": "node",
+        "snapshot": "79e1504eb0e1a5954864a757c659ab5f76caacc4522246c779a28098978d1564",
+        "files": 2,
+        "bytes": 606,
+        "exitCode": 0,
+        "elapsedMs": 3206,
+        "output": "TAP version 13\n# Subtest: JSON object\nok 1 - JSON object\n  ---\n  duration_ms: 10.196417\n  type: 'test'\n  ...\n# Subtest: reject executable expressions\nok 2 - reject executable expressions\n  ---\n  duration_ms: 1.530292\n  type: 'test'\n  ...\n# Subtest: invalid JSON\nok 3 - invalid JSON\n  ---\n  duration_ms: 0.222458\n  type: 'test'\n  ...\n1..3\n# tests 3\n# suites 0\n# pass 3\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 513.968084\n",
+        "workdir": "/workspace",
+        "startupMs": 794,
+        "executionMs": 1392
+      },
+      "appliedThenReverted": true
+    }
+  ]
+}

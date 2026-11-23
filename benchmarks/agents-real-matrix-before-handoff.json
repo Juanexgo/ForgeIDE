@@ -1,0 +1,298 @@
+{
+  "date": "2026-11-23T22:02:54.641Z",
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "modelDetails": {
+    "parent_model": "",
+    "format": "gguf",
+    "family": "qwen3",
+    "families": [
+      "qwen3"
+    ],
+    "parameter_size": "4.0B",
+    "quantization_level": "Q4_K_M"
+  },
+  "modelArchitecture": "qwen3",
+  "scope": "Four deterministic synthetic role fixtures using the actual Forge agent, shared production tool definitions, real Theia Ollama adapter and backend. Driver reviews, verifies, applies and reverts after generation; no chat UI or autonomous application. No general model-quality or security certification.",
+  "results": [
+    {
+      "id": "clamp-feature",
+      "role": "ForgeImplement",
+      "status": "passed",
+      "toolCalls": [
+        {
+          "tool": "forge_read_file",
+          "args": {
+            "path": "main.mjs"
+          },
+          "result": {
+            "path": "main.mjs",
+            "content": "export function clamp(value, lower, upper) { return value; }\n"
+          }
+        },
+        {
+          "tool": "forge_safeapply_propose",
+          "args": {
+            "path": "main.mjs",
+            "after": "export function clamp(value, lower, upper) {\n  if (value < lower) {\n    return lower;\n  }\n  if (value > upper) {\n    return upper;\n  }\n  return value;\n}\n"
+          },
+          "result": {
+            "id": "a72102ca-930f-47eb-b4aa-7792cc4fdb40",
+            "path": "main.mjs",
+            "status": "review",
+            "verification": "not_run",
+            "next": "Open Forge Control to review. No file was changed."
+          }
+        }
+      ],
+      "response": {
+        "text": "I've proposed a change to implement the clamp function in main.mjs. The function now correctly implements the required behavior:\n\n- If value is below lower, it returns lower\n- If value is above upper, it returns upper  \n- If value is within the range, it returns value unchanged\n\nThe proposal has been created and is now in review state. The change is ready for the user to review in Forge Control. No file has been changed yet - this is just a proposal that will need to be reviewed and potentially applied.\n\nThe implementation is complete and ready for review. The function is now properly implemented with the correct logic for clamping values between lower and upper bounds.",
+        "usage": {
+          "input_tokens": 1298,
+          "output_tokens": 136
+        }
+      },
+      "verification": {
+        "id": "ccefc7ef-7f6f-409b-a115-c3f453e3882c",
+        "proposalId": "a72102ca-930f-47eb-b4aa-7792cc4fdb40",
+        "proof": "648273c927fe82dd937fa8a1558b81b87c2c7ec1e1ff51837c53272a8513f0cb",
+        "created": "2026-11-23T22:08:31.438Z",
+        "status": "passed",
+        "image": "node@sha256:116b800c3754b440ee0aa3ed2f20f5bf3d99a554bfd9adeea09ea8017f6e85f5",
+        "command": [
+          "node",
+          "--test",
+          "--test-reporter=tap"
+        ],
+        "profile": "node",
+        "snapshot": "02a950f290596887b09a7bb13dd36878863a6589124c74369c9f0d54958b7fca",
+        "files": 2,
+        "bytes": 419,
+        "exitCode": 0,
+        "elapsedMs": 18092,
+        "output": "TAP version 13\n# Subtest: lower bound\nok 1 - lower bound\n  ---\n  duration_ms: 36.429666\n  type: 'test'\n  ...\n# Subtest: upper bound\nok 2 - upper bound\n  ---\n  duration_ms: 0.612792\n  type: 'test'\n  ...\n# Subtest: inside\nok 3 - inside\n  ---\n  duration_ms: 2.552125\n  type: 'test'\n  ...\n1..3\n# tests 3\n# suites 0\n# pass 3\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 2891.761294\n",
+        "workdir": "/workspace",
+        "startupMs": 5321,
+        "executionMs": 8768
+      },
+      "appliedThenReverted": true
+    },
+    {
+      "id": "addition-regression",
+      "role": "ForgeFix",
+      "status": "passed",
+      "toolCalls": [
+        {
+          "tool": "forge_read_file",
+          "args": {
+            "path": "main.mjs"
+          },
+          "result": {
+            "path": "main.mjs",
+            "content": "export function add(a,b) { return a-b; }\n"
+          }
+        },
+        {
+          "tool": "forge_read_file",
+          "args": {
+            "path": "main.test.mjs"
+          },
+          "result": {
+            "path": "main.test.mjs",
+            "content": "import {test} from 'node:test';import assert from 'node:assert/strict';\nimport {add} from './main.mjs';test('positive',()=>assert.equal(add(2,3),5));test('negative',()=>assert.equal(add(-2,3),1));test('zero',()=>assert.equal(add(0,0),0));\n"
+          }
+        },
+        {
+          "tool": "forge_safeapply_propose",
+          "args": {
+            "path": "main.mjs",
+            "after": "export function add(a,b) { return a + b; }\n"
+          },
+          "result": {
+            "id": "c6030d11-67f6-42eb-8753-6426fe050c28",
+            "path": "main.mjs",
+            "status": "review",
+            "verification": "not_run",
+            "next": "Open Forge Control to review. No file was changed."
+          }
+        }
+      ],
+      "response": {
+        "text": "I have identified and corrected the bug in the `add(a,b)` function. The function was incorrectly implementing subtraction (`a - b`) instead of addition.\n\nThe fix is to change the function body from `return a - b;` to `return a + b;`.\n\nI have proposed the correction using the safeapply_propose tool, which created a review-only replacement for main.mjs. The proposed change is:\n\n```mjs\nexport function add(a,b) {\n  return a + b;\n}\n```\n\nThis change ensures that when `add(2,3)` is called, it returns 5 as expected in the test cases, and similarly for the negative and zero cases.\n\nThe proposal has been submitted for review and will only be applied if the user approves it. No changes have been applied to the actual file yet.\n\nNote: The verification status is \"not_run\" because the test cases have not been executed yet. The test cases in main.test.mjs will need to be run to confirm that the fix works correctly.",
+        "usage": {
+          "input_tokens": 1370,
+          "output_tokens": 210
+        }
+      },
+      "verification": {
+        "id": "bd79faae-94b6-40f1-9c9e-970100abb1a8",
+        "proposalId": "c6030d11-67f6-42eb-8753-6426fe050c28",
+        "proof": "b4d7f6d0736e7e9fb7174ea38d973565492bff42fbafe65bb0f9ca368ed21148",
+        "created": "2026-11-23T22:08:50.262Z",
+        "status": "passed",
+        "image": "node@sha256:116b800c3754b440ee0aa3ed2f20f5bf3d99a554bfd9adeea09ea8017f6e85f5",
+        "command": [
+          "node",
+          "--test",
+          "--test-reporter=tap"
+        ],
+        "profile": "node",
+        "snapshot": "0263a39a7e968d25a52ebd9c915b49b2bbc2c96733821912fc337f18a6e85e00",
+        "files": 2,
+        "bytes": 282,
+        "exitCode": 0,
+        "elapsedMs": 7311,
+        "output": "TAP version 13\n# Subtest: positive\nok 1 - positive\n  ---\n  duration_ms: 22.151792\n  type: 'test'\n  ...\n# Subtest: negative\nok 2 - negative\n  ---\n  duration_ms: 3.807833\n  type: 'test'\n  ...\n# Subtest: zero\nok 3 - zero\n  ---\n  duration_ms: 0.539584\n  type: 'test'\n  ...\n1..3\n# tests 3\n# suites 0\n# pass 3\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 1345.367834\n",
+        "workdir": "/workspace",
+        "startupMs": 2481,
+        "executionMs": 2969
+      },
+      "appliedThenReverted": true
+    },
+    {
+      "id": "addition-tests",
+      "role": "ForgeTests",
+      "status": "passed",
+      "toolCalls": [
+        {
+          "tool": "forge_read_file",
+          "args": {
+            "path": "main.mjs"
+          },
+          "result": {
+            "path": "main.mjs",
+            "content": "export function add(a,b) { return a+b; }\n"
+          }
+        },
+        {
+          "tool": "forge_read_file",
+          "args": {
+            "path": "main.test.mjs"
+          },
+          "result": {
+            "path": "main.test.mjs",
+            "content": "import {test} from 'node:test';import assert from 'node:assert/strict';\nimport {add} from './main.mjs';test('positive',()=>assert.equal(add(2,3),5));\n"
+          }
+        },
+        {
+          "tool": "forge_safeapply_propose",
+          "args": {
+            "path": "main.test.mjs",
+            "after": "import { test } from 'node:test';\nimport assert from 'node:assert/strict';\nimport { add } from './main.mjs';\n\ntest('positive', () => {\n  assert.equal(add(2, 3), 5);\n});\n\ntest('zero first argument', () => {\n  assert.equal(add(0, 4), 4);\n});\n\ntest('negative first argument', () => {\n  assert.equal(add(-1, 5), 4);\n});"
+          },
+          "result": {
+            "id": "2946b385-5665-4a11-832b-08ff4f01d336",
+            "path": "main.test.mjs",
+            "status": "review",
+            "verification": "not_run",
+            "next": "Open Forge Control to review. No file was changed."
+          }
+        }
+      ],
+      "response": {
+        "text": "The proposed update to `main.test.mjs` has been successfully created as a review-only change. The new tests for a zero first argument and a negative first argument are now included, while preserving the original positive test case.\n\nHowever, the verification status is \"not_run\", indicating that no actual test execution has been performed yet. This means the correctness of the new tests cannot be confirmed without running them in a constrained environment.\n\nTo verify the correctness of these tests, a verification run must be initiated using `forge_verify_group`. However, this requires an existing immutable container image digest that has been prepared by the user. Since no such digest is provided, I must request the user to prepare the runtime in Forge Control before proceeding with verification.\n\nI will now propose a verification step, but only if the user provides the necessary image digest. Otherwise, the verification cannot be performed.\n\nFor now, the change is ready for review, and the user should proceed to verify it in a controlled environment.\n\nFinal status:\n- Proposal created: ✅\n- Verification status: ❌ (requires user action to provide image digest)\n- Test coverage:\n  - Positive: ✅ (preserved)\n  - Zero first argument: ✅ (new)\n  - Negative first argument: ✅ (new)\n\nNext step: Request the user to prepare the runtime in Forge Control and provide the immutable image digest to proceed with verification.\n\nIf you would like me to proceed with a verification run, please provide the image digest. Otherwise, the proposal remains in review status.",
+        "usage": {
+          "input_tokens": 1589,
+          "output_tokens": 310
+        }
+      },
+      "verification": {
+        "id": "507baea9-8245-4268-97bd-78c359e7ea58",
+        "proposalId": "2946b385-5665-4a11-832b-08ff4f01d336",
+        "proof": "8d5ccd5585bb1c4df3afe0795e1255b2e03a559c182e2b5888e577a7922bb132",
+        "created": "2026-11-23T22:08:57.810Z",
+        "status": "passed",
+        "image": "node@sha256:116b800c3754b440ee0aa3ed2f20f5bf3d99a554bfd9adeea09ea8017f6e85f5",
+        "command": [
+          "node",
+          "--test",
+          "--test-reporter=tap"
+        ],
+        "profile": "node",
+        "snapshot": "9fd01511bc3c4a897c34c1b11b8c0c640509c7d9f6911aa681e297a1fd0b51d8",
+        "files": 2,
+        "bytes": 356,
+        "exitCode": 0,
+        "elapsedMs": 9770,
+        "output": "TAP version 13\n# Subtest: positive\nok 1 - positive\n  ---\n  duration_ms: 5.5365\n  type: 'test'\n  ...\n# Subtest: zero first argument\nok 2 - zero first argument\n  ---\n  duration_ms: 3.308791\n  type: 'test'\n  ...\n# Subtest: negative first argument\nok 3 - negative first argument\n  ---\n  duration_ms: 6.597375\n  type: 'test'\n  ...\n1..3\n# tests 3\n# suites 0\n# pass 3\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 2331.592876\n",
+        "workdir": "/workspace",
+        "startupMs": 2944,
+        "executionMs": 5213
+      },
+      "mutation": {
+        "id": "229f1398-4838-4cba-96a5-1f62f1ef3835",
+        "proposalId": "7a2c4309-2389-4017-b095-ce7f44b2fd5c",
+        "proof": "901a6bcaba0802f254b468f1ba41d8805cd6f9091c68f84384e21cde0ad9462c",
+        "created": "2026-11-23T22:09:07.706Z",
+        "status": "failed",
+        "image": "node@sha256:116b800c3754b440ee0aa3ed2f20f5bf3d99a554bfd9adeea09ea8017f6e85f5",
+        "command": [
+          "node",
+          "--test",
+          "--test-reporter=tap"
+        ],
+        "profile": "node",
+        "snapshot": "f84a123255cc722676e53016d45fffe3a347670f3ad70b7d18680b525526ec58",
+        "files": 2,
+        "bytes": 376,
+        "exitCode": 1,
+        "elapsedMs": 10858,
+        "output": "TAP version 13\n# Subtest: positive\nok 1 - positive\n  ---\n  duration_ms: 31.002084\n  type: 'test'\n  ...\n# Subtest: zero first argument\nnot ok 2 - zero first argument\n  ---\n  duration_ms: 25.642542\n  type: 'test'\n  location: '/workspace/main.test.mjs:9:1'\n  failureType: 'testCodeFailure'\n  error: |-\n    Expected values to be strictly equal:\n    \n    999 !== 4\n    \n  code: 'ERR_ASSERTION'\n  name: 'AssertionError'\n  expected: 4\n  actual: 999\n  operator: 'strictEqual'\n  stack: |-\n    TestContext.<anonymous> (file:///workspace/main.test.mjs:10:10)\n    Test.runInAsyncScope (node:async_hooks:227:14)\n    Test.run (node:internal/test_runner/test:1402:25)\n    Test.processPendingSubtests (node:internal/test_runner/test:974:18)\n    Test.postRun (node:internal/test_runner/test:1542:19)\n    Test.run (node:internal/test_runner/test:1467:12)\n    async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)\n  ...\n# Subtest: negative first argument\nnot ok 3 - negative first argument\n  ---\n  duration_ms: 8.002791\n  type: 'test'\n  location: '/workspace/main.test.mjs:13:1'\n  failureType: 'testCodeFailure'\n  error: |-\n    Expected values to be strictly equal:\n    \n    999 !== 4\n    \n  code: 'ERR_ASSERTION'\n  name: 'AssertionError'\n  expected: 4\n  actual: 999\n  operator: 'strictEqual'\n  stack: |-\n    TestContext.<anonymous> (file:///workspace/main.test.mjs:14:10)\n    Test.runInAsyncScope (node:async_hooks:227:14)\n    Test.run (node:internal/test_runner/test:1402:25)\n    Test.processPendingSubtests (node:internal/test_runner/test:974:18)\n    Test.postRun (node:internal/test_runner/test:1542:19)\n    Test.run (node:internal/test_runner/test:1467:12)\n    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)\n  ...\n1..3\n# tests 3\n# suites 0\n# pass 1\n# fail 2\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 4007.758919\n",
+        "workdir": "/workspace",
+        "startupMs": 3269,
+        "executionMs": 5896
+      },
+      "appliedThenReverted": true
+    },
+    {
+      "id": "remove-code-evaluation",
+      "role": "ForgeSecurity",
+      "status": "failed",
+      "toolCalls": [
+        {
+          "tool": "forge_read_file",
+          "args": {
+            "path": "main.mjs"
+          },
+          "result": {
+            "path": "main.mjs",
+            "content": "export function parseConfig(text) { return (new Function('return ('+text+')'))(); }\n"
+          }
+        },
+        {
+          "tool": "forge_read_file",
+          "args": {
+            "path": "main.test.mjs"
+          },
+          "result": {
+            "path": "main.test.mjs",
+            "content": "import {test} from 'node:test';import assert from 'node:assert/strict';\nimport {parseConfig} from './main.mjs';test('JSON object',()=>assert.deepEqual(parseConfig('{\"ok\":true}'),{ok:true}));test('reject executable expressions',()=>{delete globalThis.forgeUnsafe;assert.throws(()=>parseConfig('(globalThis.forgeUnsafe=1,{ok:true})'));assert.equal(globalThis.forgeUnsafe,undefined);});test('invalid JSON',()=>assert.throws(()=>parseConfig('not json')));\n"
+          }
+        },
+        {
+          "tool": "forge_safeapply_propose",
+          "args": {
+            "path": "main.mjs",
+            "after": "export function parseConfig(text) {\n  try {\n    return JSON.parse(text);\n  } catch (e) {\n    throw new Error(`Invalid JSON: ${e.message}`);\n  }\n}\n"
+          },
+          "result": {
+            "id": "99f02e2b-20f5-4bee-886f-c1db84c05850",
+            "path": "main.mjs",
+            "status": "review",
+            "verification": "not_run",
+            "next": "Open Forge Control to review. No file was changed."
+          }
+        },
+        {
+          "tool": "forge_verification_runs",
+          "args": {
+            "groupIds": [
+              "99f02e2b-20f5-4bee-886f-c1db84c05850"
+            ]
+          },
+          "result": []
+        }
+      ],
+      "error": "This operation was aborted"
+    }
+  ]
+}

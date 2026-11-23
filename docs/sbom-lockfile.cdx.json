@@ -1,14 +1,14 @@
 {
   "bomFormat": "CycloneDX",
   "specVersion": "1.5",
-  "serialNumber": "urn:uuid:40174818-f0c5-4d21-afa9-403a2d27c13a",
+  "serialNumber": "urn:uuid:e564613f-c426-4917-83aa-1ab0ea394d25",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-11-21T04:37:59.978Z",
+    "timestamp": "2026-11-23T22:30:12.815Z",
     "component": {
       "type": "application",
       "name": "ForgeIDE",
-      "version": "0.9.0-alpha.1"
+      "version": "0.9.1-alpha.1"
     },
     "properties": [
       {
@@ -20,10 +20,62 @@
   "components": [
     {
       "type": "library",
+      "name": "@acemir/cssom",
+      "version": "0.9.33",
+      "bom-ref": "@acemir/cssom@0.9.33",
+      "purl": "pkg:npm/%40acemir/cssom@0.9.33",
+      "properties": [
+        {
+          "name": "forge:scope",
+          "value": "lockfile inventory; includes development; not a shipped-dependency assertion"
+        }
+      ]
+    },
+    {
+      "type": "library",
       "name": "@antfu/install-pkg",
       "version": "2.1.0",
       "bom-ref": "@antfu/install-pkg@2.1.0",
       "purl": "pkg:npm/%40antfu/install-pkg@2.1.0",
+      "properties": [
+        {
+          "name": "forge:scope",
+          "value": "lockfile inventory; includes development; not a shipped-dependency assertion"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "@asamuzakjp/css-color",
+      "version": "4.1.2",
+      "bom-ref": "@asamuzakjp/css-color@4.1.2",
+      "purl": "pkg:npm/%40asamuzakjp/css-color@4.1.2",
+      "properties": [
+        {
+          "name": "forge:scope",
+          "value": "lockfile inventory; includes development; not a shipped-dependency assertion"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "@asamuzakjp/dom-selector",
+      "version": "6.8.1",
+      "bom-ref": "@asamuzakjp/dom-selector@6.8.1",
+      "purl": "pkg:npm/%40asamuzakjp/dom-selector@6.8.1",
+      "properties": [
+        {
+          "name": "forge:scope",
+          "value": "lockfile inventory; includes development; not a shipped-dependency assertion"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "@asamuzakjp/nwsapi",
+      "version": "2.3.9",
+      "bom-ref": "@asamuzakjp/nwsapi@2.3.9",
+      "purl": "pkg:npm/%40asamuzakjp/nwsapi@2.3.9",
       "properties": [
         {
           "name": "forge:scope",
@@ -76,6 +128,84 @@
       "version": "11.1.2",
       "bom-ref": "@chevrotain/types@11.1.2",
       "purl": "pkg:npm/%40chevrotain/types@11.1.2",
+      "properties": [
+        {
+          "name": "forge:scope",
+          "value": "lockfile inventory; includes development; not a shipped-dependency assertion"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "@csstools/color-helpers",
+      "version": "6.1.3",
+      "bom-ref": "@csstools/color-helpers@6.1.3",
+      "purl": "pkg:npm/%40csstools/color-helpers@6.1.3",
+      "properties": [
+        {
+          "name": "forge:scope",
+          "value": "lockfile inventory; includes development; not a shipped-dependency assertion"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "@csstools/css-calc",
+      "version": "3.4.4",
+      "bom-ref": "@csstools/css-calc@3.4.4",
+      "purl": "pkg:npm/%40csstools/css-calc@3.4.4",
+      "properties": [
+        {
+          "name": "forge:scope",
+          "value": "lockfile inventory; includes development; not a shipped-dependency assertion"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "@csstools/css-color-parser",
+      "version": "4.2.8",
+      "bom-ref": "@csstools/css-color-parser@4.2.8",
+      "purl": "pkg:npm/%40csstools/css-color-parser@4.2.8",
+      "properties": [
+        {
+          "name": "forge:scope",
+          "value": "lockfile inventory; includes development; not a shipped-dependency assertion"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "@csstools/css-parser-algorithms",
+      "version": "4.0.3",
+      "bom-ref": "@csstools/css-parser-algorithms@4.0.3",
+      "purl": "pkg:npm/%40csstools/css-parser-algorithms@4.0.3",
+      "properties": [
+        {
+          "name": "forge:scope",
+          "value": "lockfile inventory; includes development; not a shipped-dependency assertion"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "@csstools/css-syntax-patches-for-csstree",
+      "version": "1.1.17",
+      "bom-ref": "@csstools/css-syntax-patches-for-csstree@1.1.17",
+      "purl": "pkg:npm/%40csstools/css-syntax-patches-for-csstree@1.1.17",
+      "properties": [
+        {
+          "name": "forge:scope",
+          "value": "lockfile inventory; includes development; not a shipped-dependency assertion"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "@csstools/css-tokenizer",
+      "version": "4.0.3",
+      "bom-ref": "@csstools/css-tokenizer@4.0.3",
+      "purl": "pkg:npm/%40csstools/css-tokenizer@4.0.3",
       "properties": [
         {
           "name": "forge:scope",
@@ -4414,6 +4544,19 @@
     },
     {
       "type": "library",
+      "name": "axe-core",
+      "version": "4.14.1",
+      "bom-ref": "axe-core@4.14.1",
+      "purl": "pkg:npm/axe-core@4.14.1",
+      "properties": [
+        {
+          "name": "forge:scope",
+          "value": "lockfile inventory; includes development; not a shipped-dependency assertion"
+        }
+      ]
+    },
+    {
+      "type": "library",
       "name": "axios",
       "version": "1.21.1",
       "bom-ref": "axios@1.21.1",
@@ -4587,6 +4730,19 @@
       "version": "7.3.12",
       "bom-ref": "bent@7.3.12",
       "purl": "pkg:npm/bent@7.3.12",
+      "properties": [
+        {
+          "name": "forge:scope",
+          "value": "lockfile inventory; includes development; not a shipped-dependency assertion"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "bidi-js",
+      "version": "1.1.0",
+      "bom-ref": "bidi-js@1.1.0",
+      "purl": "pkg:npm/bidi-js@1.1.0",
       "properties": [
         {
           "name": "forge:scope",
@@ -5727,6 +5883,32 @@
     },
     {
       "type": "library",
+      "name": "css-tree",
+      "version": "3.2.1",
+      "bom-ref": "css-tree@3.2.1",
+      "purl": "pkg:npm/css-tree@3.2.1",
+      "properties": [
+        {
+          "name": "forge:scope",
+          "value": "lockfile inventory; includes development; not a shipped-dependency assertion"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "cssstyle",
+      "version": "5.3.7",
+      "bom-ref": "cssstyle@5.3.7",
+      "purl": "pkg:npm/cssstyle@5.3.7",
+      "properties": [
+        {
+          "name": "forge:scope",
+          "value": "lockfile inventory; includes development; not a shipped-dependency assertion"
+        }
+      ]
+    },
+    {
+      "type": "library",
       "name": "csstype",
       "version": "3.2.4",
       "bom-ref": "csstype@3.2.4",
@@ -6247,6 +6429,19 @@
     },
     {
       "type": "library",
+      "name": "data-urls",
+      "version": "6.0.1",
+      "bom-ref": "data-urls@6.0.1",
+      "purl": "pkg:npm/data-urls@6.0.1",
+      "properties": [
+        {
+          "name": "forge:scope",
+          "value": "lockfile inventory; includes development; not a shipped-dependency assertion"
+        }
+      ]
+    },
+    {
+      "type": "library",
       "name": "data-view-buffer",
       "version": "1.0.2",
       "bom-ref": "data-view-buffer@1.0.2",
@@ -6368,6 +6563,19 @@
       "version": "4.0.0",
       "bom-ref": "decamelize@4.0.0",
       "purl": "pkg:npm/decamelize@4.0.0",
+      "properties": [
+        {
+          "name": "forge:scope",
+          "value": "lockfile inventory; includes development; not a shipped-dependency assertion"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "decimal.js",
+      "version": "10.6.0",
+      "bom-ref": "decimal.js@10.6.0",
+      "purl": "pkg:npm/decimal.js@10.6.0",
       "properties": [
         {
           "name": "forge:scope",
@@ -6953,6 +7161,19 @@
       "version": "4.5.0",
       "bom-ref": "entities@4.5.0",
       "purl": "pkg:npm/entities@4.5.0",
+      "properties": [
+        {
+          "name": "forge:scope",
+          "value": "lockfile inventory; includes development; not a shipped-dependency assertion"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "entities",
+      "version": "9.0.0",
+      "bom-ref": "entities@9.0.0",
+      "purl": "pkg:npm/entities@9.0.0",
       "properties": [
         {
           "name": "forge:scope",
@@ -8418,6 +8639,19 @@
     },
     {
       "type": "library",
+      "name": "html-encoding-sniffer",
+      "version": "4.0.0",
+      "bom-ref": "html-encoding-sniffer@4.0.0",
+      "purl": "pkg:npm/html-encoding-sniffer@4.0.0",
+      "properties": [
+        {
+          "name": "forge:scope",
+          "value": "lockfile inventory; includes development; not a shipped-dependency assertion"
+        }
+      ]
+    },
+    {
+      "type": "library",
       "name": "http-cache-semantics",
       "version": "4.3.0",
       "bom-ref": "http-cache-semantics@4.3.0",
@@ -9146,6 +9380,19 @@
     },
     {
       "type": "library",
+      "name": "is-potential-custom-element-name",
+      "version": "1.0.1",
+      "bom-ref": "is-potential-custom-element-name@1.0.1",
+      "purl": "pkg:npm/is-potential-custom-element-name@1.0.1",
+      "properties": [
+        {
+          "name": "forge:scope",
+          "value": "lockfile inventory; includes development; not a shipped-dependency assertion"
+        }
+      ]
+    },
+    {
+      "type": "library",
       "name": "is-promise",
       "version": "4.0.0",
       "bom-ref": "is-promise@4.0.0",
@@ -9475,6 +9722,19 @@
       "version": "2.3.0",
       "bom-ref": "jschardet@2.3.0",
       "purl": "pkg:npm/jschardet@2.3.0",
+      "properties": [
+        {
+          "name": "forge:scope",
+          "value": "lockfile inventory; includes development; not a shipped-dependency assertion"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "jsdom",
+      "version": "27.2.0",
+      "bom-ref": "jsdom@27.2.0",
+      "purl": "pkg:npm/jsdom@27.2.0",
       "properties": [
         {
           "name": "forge:scope",
@@ -10255,6 +10515,19 @@
       "version": "1.1.0",
       "bom-ref": "math-intrinsics@1.1.0",
       "purl": "pkg:npm/math-intrinsics@1.1.0",
+      "properties": [
+        {
+          "name": "forge:scope",
+          "value": "lockfile inventory; includes development; not a shipped-dependency assertion"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "mdn-data",
+      "version": "2.27.1",
+      "bom-ref": "mdn-data@2.27.1",
+      "purl": "pkg:npm/mdn-data@2.27.1",
       "properties": [
         {
           "name": "forge:scope",
@@ -11425,6 +11698,19 @@
       "version": "1.9.0",
       "bom-ref": "package-manager-detector@1.9.0",
       "purl": "pkg:npm/package-manager-detector@1.9.0",
+      "properties": [
+        {
+          "name": "forge:scope",
+          "value": "lockfile inventory; includes development; not a shipped-dependency assertion"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "parse5",
+      "version": "8.1.1",
+      "bom-ref": "parse5@8.1.1",
+      "purl": "pkg:npm/parse5@8.1.1",
       "properties": [
         {
           "name": "forge:scope",
@@ -12890,6 +13176,19 @@
     },
     {
       "type": "library",
+      "name": "saxes",
+      "version": "6.0.0",
+      "bom-ref": "saxes@6.0.0",
+      "purl": "pkg:npm/saxes@6.0.0",
+      "properties": [
+        {
+          "name": "forge:scope",
+          "value": "lockfile inventory; includes development; not a shipped-dependency assertion"
+        }
+      ]
+    },
+    {
+      "type": "library",
       "name": "scheduler",
       "version": "0.28.0",
       "bom-ref": "scheduler@0.28.0",
@@ -13475,6 +13774,19 @@
     },
     {
       "type": "library",
+      "name": "source-map-js",
+      "version": "1.2.4",
+      "bom-ref": "source-map-js@1.2.4",
+      "purl": "pkg:npm/source-map-js@1.2.4",
+      "properties": [
+        {
+          "name": "forge:scope",
+          "value": "lockfile inventory; includes development; not a shipped-dependency assertion"
+        }
+      ]
+    },
+    {
+      "type": "library",
       "name": "source-map-support",
       "version": "0.5.21",
       "bom-ref": "source-map-support@0.5.21",
@@ -13878,6 +14190,19 @@
     },
     {
       "type": "library",
+      "name": "symbol-tree",
+      "version": "3.2.4",
+      "bom-ref": "symbol-tree@3.2.4",
+      "purl": "pkg:npm/symbol-tree@3.2.4",
+      "properties": [
+        {
+          "name": "forge:scope",
+          "value": "lockfile inventory; includes development; not a shipped-dependency assertion"
+        }
+      ]
+    },
+    {
+      "type": "library",
       "name": "tar",
       "version": "7.5.23",
       "bom-ref": "tar@7.5.23",
@@ -14034,6 +14359,32 @@
     },
     {
       "type": "library",
+      "name": "tldts",
+      "version": "7.5.5",
+      "bom-ref": "tldts@7.5.5",
+      "purl": "pkg:npm/tldts@7.5.5",
+      "properties": [
+        {
+          "name": "forge:scope",
+          "value": "lockfile inventory; includes development; not a shipped-dependency assertion"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "tldts-core",
+      "version": "7.5.5",
+      "bom-ref": "tldts-core@7.5.5",
+      "purl": "pkg:npm/tldts-core@7.5.5",
+      "properties": [
+        {
+          "name": "forge:scope",
+          "value": "lockfile inventory; includes development; not a shipped-dependency assertion"
+        }
+      ]
+    },
+    {
+      "type": "library",
       "name": "tmp",
       "version": "0.2.7",
       "bom-ref": "tmp@0.2.7",
@@ -14077,6 +14428,32 @@
       "version": "1.0.1",
       "bom-ref": "toidentifier@1.0.1",
       "purl": "pkg:npm/toidentifier@1.0.1",
+      "properties": [
+        {
+          "name": "forge:scope",
+          "value": "lockfile inventory; includes development; not a shipped-dependency assertion"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "tough-cookie",
+      "version": "6.1.0",
+      "bom-ref": "tough-cookie@6.1.0",
+      "purl": "pkg:npm/tough-cookie@6.1.0",
+      "properties": [
+        {
+          "name": "forge:scope",
+          "value": "lockfile inventory; includes development; not a shipped-dependency assertion"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "tr46",
+      "version": "6.0.0",
+      "bom-ref": "tr46@6.0.0",
+      "purl": "pkg:npm/tr46@6.0.0",
       "properties": [
         {
           "name": "forge:scope",
@@ -14853,6 +15230,19 @@
     },
     {
       "type": "library",
+      "name": "w3c-xmlserializer",
+      "version": "5.0.0",
+      "bom-ref": "w3c-xmlserializer@5.0.0",
+      "purl": "pkg:npm/w3c-xmlserializer@5.0.0",
+      "properties": [
+        {
+          "name": "forge:scope",
+          "value": "lockfile inventory; includes development; not a shipped-dependency assertion"
+        }
+      ]
+    },
+    {
+      "type": "library",
       "name": "webcrypto-core",
       "version": "1.9.2",
       "bom-ref": "webcrypto-core@1.9.2",
@@ -14879,6 +15269,19 @@
     },
     {
       "type": "library",
+      "name": "webidl-conversions",
+      "version": "8.0.1",
+      "bom-ref": "webidl-conversions@8.0.1",
+      "purl": "pkg:npm/webidl-conversions@8.0.1",
+      "properties": [
+        {
+          "name": "forge:scope",
+          "value": "lockfile inventory; includes development; not a shipped-dependency assertion"
+        }
+      ]
+    },
+    {
+      "type": "library",
       "name": "whatwg-encoding",
       "version": "2.0.0",
       "bom-ref": "whatwg-encoding@2.0.0",
@@ -14892,10 +15295,62 @@
     },
     {
       "type": "library",
+      "name": "whatwg-encoding",
+      "version": "3.1.1",
+      "bom-ref": "whatwg-encoding@3.1.1",
+      "purl": "pkg:npm/whatwg-encoding@3.1.1",
+      "properties": [
+        {
+          "name": "forge:scope",
+          "value": "lockfile inventory; includes development; not a shipped-dependency assertion"
+        }
+      ]
+    },
+    {
+      "type": "library",
       "name": "whatwg-fetch",
       "version": "3.6.20",
       "bom-ref": "whatwg-fetch@3.6.20",
       "purl": "pkg:npm/whatwg-fetch@3.6.20",
+      "properties": [
+        {
+          "name": "forge:scope",
+          "value": "lockfile inventory; includes development; not a shipped-dependency assertion"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "whatwg-mimetype",
+      "version": "4.0.0",
+      "bom-ref": "whatwg-mimetype@4.0.0",
+      "purl": "pkg:npm/whatwg-mimetype@4.0.0",
+      "properties": [
+        {
+          "name": "forge:scope",
+          "value": "lockfile inventory; includes development; not a shipped-dependency assertion"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "whatwg-mimetype",
+      "version": "5.0.0",
+      "bom-ref": "whatwg-mimetype@5.0.0",
+      "purl": "pkg:npm/whatwg-mimetype@5.0.0",
+      "properties": [
+        {
+          "name": "forge:scope",
+          "value": "lockfile inventory; includes development; not a shipped-dependency assertion"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "whatwg-url",
+      "version": "15.1.0",
+      "bom-ref": "whatwg-url@15.1.0",
+      "purl": "pkg:npm/whatwg-url@15.1.0",
       "properties": [
         {
           "name": "forge:scope",
@@ -15152,10 +15607,36 @@
     },
     {
       "type": "library",
+      "name": "xml-name-validator",
+      "version": "5.0.0",
+      "bom-ref": "xml-name-validator@5.0.0",
+      "purl": "pkg:npm/xml-name-validator@5.0.0",
+      "properties": [
+        {
+          "name": "forge:scope",
+          "value": "lockfile inventory; includes development; not a shipped-dependency assertion"
+        }
+      ]
+    },
+    {
+      "type": "library",
       "name": "xmlbuilder",
       "version": "15.1.1",
       "bom-ref": "xmlbuilder@15.1.1",
       "purl": "pkg:npm/xmlbuilder@15.1.1",
+      "properties": [
+        {
+          "name": "forge:scope",
+          "value": "lockfile inventory; includes development; not a shipped-dependency assertion"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "xmlchars",
+      "version": "2.2.0",
+      "bom-ref": "xmlchars@2.2.0",
+      "purl": "pkg:npm/xmlchars@2.2.0",
       "properties": [
         {
           "name": "forge:scope",

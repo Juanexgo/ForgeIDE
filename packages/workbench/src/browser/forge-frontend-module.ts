@@ -1,3 +1,4 @@
+import {proposalTool} from '../common/forge-tool-definitions.js';
 import { CommandRegistry } from '@theia/core/lib/common/command.js';
 import { KeybindingRegistry } from '@theia/core/lib/browser/keybinding.js';
 import { ContainerModule, injectable, inject } from 'inversify';
@@ -31,20 +32,10 @@ class ForgeProposalTool implements ToolProvider {
  @inject(ForgeService) protected api!: ForgeService;
  @inject(WorkspaceService) protected workspace!: WorkspaceService;
  private root?: string; private session?: string;
- getTool(): ToolRequest {return {
-  id:'forge_safeapply_propose', name:'forge_safeapply_propose', providerName:'ForgeIDE',
-  description:'Create a durable, review-only replacement of one existing UTF-8 file. Does not apply changes or execute code. User reviews and applies in Forge Control. Never claim tests passed.',
-  parameters:{type:'object',properties:{path:{type:'string',description:'Relative workspace path'},after:{type:'string',description:'Complete proposed file text'}},required:['path','after']},
-  handler: async raw => {
-   const args: unknown = JSON.parse(raw);
-   if(!args || typeof args!=='object' || !('path' in args) || !('after' in args) || typeof args.path!=='string' || typeof args.after!=='string') throw new Error('Expected path and after strings');
-   const root = (await this.workspace.roots)[0]?.resource.toString();
-   if(!root) throw new Error('Open a local workspace first');
-   if(root!==this.root || !this.session) {this.session=await this.api.open(root);this.root=root;}
-   const p=await this.api.propose(this.session,args.path,args.after);
-   return {id:p.id,path:p.path,status:p.status,verification:p.verification,next:'Open Forge Control and refresh to review. No file was changed.'};
-  }
- };}
+ getTool():ToolRequest {return proposalTool(this.api,async()=>{
+  const root=(await this.workspace.roots)[0]?.resource.toString();if(!root)throw Error('Open a local workspace first');
+  if(root!==this.root||!this.session){this.session=await this.api.open(root);this.root=root;}return this.session;
+ });}
 }
 export default new ContainerModule(bind => {
  bindForgeAgents(bind);bindReadTools(bind);bindGroupTools(bind);

@@ -1,0 +1,521 @@
+{
+  "date": "2026-11-23T22:29:11.457Z",
+  "hardware": {
+    "cpu": "Apple M2",
+    "ramBytes": 8589934592,
+    "platform": "darwin",
+    "release": "25.3.0"
+  },
+  "fixture": {
+    "files": 2000,
+    "sha256": "5241a1bd92c9ee5d6fed0b3c43a10bb7c18c0fd49482b8126a84aea15ae1482e",
+    "content": "Deterministic generated TypeScript files, 64 lines each"
+  },
+  "scope": "Bundled search-engine CLI comparison only. Does not measure full IDE startup, RAM, typing, accessibility, AI or UI responsiveness. Nine samples per scenario with rotating order; process spawn and result capture included, filesystem cache uncontrolled, no superiority claim.",
+  "results": [
+    {
+      "name": "ForgeIDE",
+      "version": "0.9.0-alpha.1",
+      "engine": "ripgrep 15.0.0 (rev 3a612f88b8)",
+      "architecture": "arm64",
+      "samples": [
+        {
+          "scenario": "literal",
+          "run": 0,
+          "order": 0,
+          "elapsedMs": 560.0842499999999,
+          "maxResidentBytes": 5898240,
+          "matches": 200
+        },
+        {
+          "scenario": "literal",
+          "run": 1,
+          "order": 0,
+          "elapsedMs": 44.87637500000005,
+          "maxResidentBytes": 5963776,
+          "matches": 200
+        },
+        {
+          "scenario": "literal",
+          "run": 2,
+          "order": 1,
+          "elapsedMs": 51.55916600000023,
+          "maxResidentBytes": 5898240,
+          "matches": 200
+        },
+        {
+          "scenario": "literal",
+          "run": 3,
+          "order": 2,
+          "elapsedMs": 28.665791999999783,
+          "maxResidentBytes": 5947392,
+          "matches": 200
+        },
+        {
+          "scenario": "literal",
+          "run": 4,
+          "order": 2,
+          "elapsedMs": 35.86845900000026,
+          "maxResidentBytes": 5931008,
+          "matches": 200
+        },
+        {
+          "scenario": "literal",
+          "run": 5,
+          "order": 1,
+          "elapsedMs": 36.016749999999774,
+          "maxResidentBytes": 5914624,
+          "matches": 200
+        },
+        {
+          "scenario": "literal",
+          "run": 6,
+          "order": 0,
+          "elapsedMs": 31.915999999999713,
+          "maxResidentBytes": 5914624,
+          "matches": 200
+        },
+        {
+          "scenario": "literal",
+          "run": 7,
+          "order": 0,
+          "elapsedMs": 30.75,
+          "maxResidentBytes": 5865472,
+          "matches": 200
+        },
+        {
+          "scenario": "literal",
+          "run": 8,
+          "order": 1,
+          "elapsedMs": 32.06120899999996,
+          "maxResidentBytes": 5881856,
+          "matches": 200
+        },
+        {
+          "scenario": "regex",
+          "run": 0,
+          "order": 0,
+          "elapsedMs": 40.06895799999984,
+          "maxResidentBytes": 6307840,
+          "matches": 2000
+        },
+        {
+          "scenario": "regex",
+          "run": 1,
+          "order": 0,
+          "elapsedMs": 45.098207999999886,
+          "maxResidentBytes": 6242304,
+          "matches": 2000
+        },
+        {
+          "scenario": "regex",
+          "run": 2,
+          "order": 1,
+          "elapsedMs": 33.267083000000184,
+          "maxResidentBytes": 6275072,
+          "matches": 2000
+        },
+        {
+          "scenario": "regex",
+          "run": 3,
+          "order": 2,
+          "elapsedMs": 35.26758299999983,
+          "maxResidentBytes": 6225920,
+          "matches": 2000
+        },
+        {
+          "scenario": "regex",
+          "run": 4,
+          "order": 2,
+          "elapsedMs": 66.7490829999997,
+          "maxResidentBytes": 6275072,
+          "matches": 2000
+        },
+        {
+          "scenario": "regex",
+          "run": 5,
+          "order": 1,
+          "elapsedMs": 35.50983300000007,
+          "maxResidentBytes": 6176768,
+          "matches": 2000
+        },
+        {
+          "scenario": "regex",
+          "run": 6,
+          "order": 0,
+          "elapsedMs": 33.71145800000022,
+          "maxResidentBytes": 6225920,
+          "matches": 2000
+        },
+        {
+          "scenario": "regex",
+          "run": 7,
+          "order": 0,
+          "elapsedMs": 35.562167000000045,
+          "maxResidentBytes": 6242304,
+          "matches": 2000
+        },
+        {
+          "scenario": "regex",
+          "run": 8,
+          "order": 1,
+          "elapsedMs": 35.73933299999999,
+          "maxResidentBytes": 6242304,
+          "matches": 2000
+        }
+      ],
+      "summary": [
+        {
+          "scenario": "literal",
+          "medianMs": 35.86845900000026,
+          "minMs": 28.665791999999783,
+          "maxMs": 560.0842499999999,
+          "maxResidentBytes": 5963776
+        },
+        {
+          "scenario": "regex",
+          "medianMs": 35.562167000000045,
+          "minMs": 33.267083000000184,
+          "maxMs": 66.7490829999997,
+          "maxResidentBytes": 6307840
+        }
+      ]
+    },
+    {
+      "name": "VS Code",
+      "version": "1.142.0",
+      "engine": "ripgrep 15.0.0 (rev 3a612f88b8)",
+      "architecture": "arm64",
+      "samples": [
+        {
+          "scenario": "literal",
+          "run": 0,
+          "order": 1,
+          "elapsedMs": 97.00629200000003,
+          "maxResidentBytes": 5947392,
+          "matches": 200
+        },
+        {
+          "scenario": "literal",
+          "run": 1,
+          "order": 2,
+          "elapsedMs": 53.3895,
+          "maxResidentBytes": 6029312,
+          "matches": 200
+        },
+        {
+          "scenario": "literal",
+          "run": 2,
+          "order": 2,
+          "elapsedMs": 34.29991599999994,
+          "maxResidentBytes": 5947392,
+          "matches": 200
+        },
+        {
+          "scenario": "literal",
+          "run": 3,
+          "order": 1,
+          "elapsedMs": 30.542374999999993,
+          "maxResidentBytes": 5914624,
+          "matches": 200
+        },
+        {
+          "scenario": "literal",
+          "run": 4,
+          "order": 0,
+          "elapsedMs": 29.81145800000013,
+          "maxResidentBytes": 5914624,
+          "matches": 200
+        },
+        {
+          "scenario": "literal",
+          "run": 5,
+          "order": 0,
+          "elapsedMs": 33.99558399999978,
+          "maxResidentBytes": 5865472,
+          "matches": 200
+        },
+        {
+          "scenario": "literal",
+          "run": 6,
+          "order": 1,
+          "elapsedMs": 31.003374999999778,
+          "maxResidentBytes": 5832704,
+          "matches": 200
+        },
+        {
+          "scenario": "literal",
+          "run": 7,
+          "order": 2,
+          "elapsedMs": 33.36020800000006,
+          "maxResidentBytes": 5849088,
+          "matches": 200
+        },
+        {
+          "scenario": "literal",
+          "run": 8,
+          "order": 2,
+          "elapsedMs": 31.851584000000003,
+          "maxResidentBytes": 5914624,
+          "matches": 200
+        },
+        {
+          "scenario": "regex",
+          "run": 0,
+          "order": 1,
+          "elapsedMs": 51.14979199999971,
+          "maxResidentBytes": 6193152,
+          "matches": 2000
+        },
+        {
+          "scenario": "regex",
+          "run": 1,
+          "order": 2,
+          "elapsedMs": 34.252084000000195,
+          "maxResidentBytes": 6193152,
+          "matches": 2000
+        },
+        {
+          "scenario": "regex",
+          "run": 2,
+          "order": 2,
+          "elapsedMs": 35.14866600000005,
+          "maxResidentBytes": 6193152,
+          "matches": 2000
+        },
+        {
+          "scenario": "regex",
+          "run": 3,
+          "order": 1,
+          "elapsedMs": 39.054541999999856,
+          "maxResidentBytes": 6193152,
+          "matches": 2000
+        },
+        {
+          "scenario": "regex",
+          "run": 4,
+          "order": 0,
+          "elapsedMs": 35.55387500000006,
+          "maxResidentBytes": 6209536,
+          "matches": 2000
+        },
+        {
+          "scenario": "regex",
+          "run": 5,
+          "order": 0,
+          "elapsedMs": 41.542541000000256,
+          "maxResidentBytes": 6242304,
+          "matches": 2000
+        },
+        {
+          "scenario": "regex",
+          "run": 6,
+          "order": 1,
+          "elapsedMs": 35.6557499999999,
+          "maxResidentBytes": 6209536,
+          "matches": 2000
+        },
+        {
+          "scenario": "regex",
+          "run": 7,
+          "order": 2,
+          "elapsedMs": 35.36524999999983,
+          "maxResidentBytes": 6176768,
+          "matches": 2000
+        },
+        {
+          "scenario": "regex",
+          "run": 8,
+          "order": 2,
+          "elapsedMs": 33.450166999999965,
+          "maxResidentBytes": 6209536,
+          "matches": 2000
+        }
+      ],
+      "summary": [
+        {
+          "scenario": "literal",
+          "medianMs": 33.36020800000006,
+          "minMs": 29.81145800000013,
+          "maxMs": 97.00629200000003,
+          "maxResidentBytes": 6029312
+        },
+        {
+          "scenario": "regex",
+          "medianMs": 35.55387500000006,
+          "minMs": 33.450166999999965,
+          "maxMs": 51.14979199999971,
+          "maxResidentBytes": 6242304
+        }
+      ]
+    },
+    {
+      "name": "Cursor",
+      "version": "3.28.7",
+      "engine": "ripgrep 15.1.0-cursor5 (rev c3e3c2f7ec)",
+      "architecture": "x86_64 arm64",
+      "samples": [
+        {
+          "scenario": "literal",
+          "run": 0,
+          "order": 2,
+          "elapsedMs": 40.36341600000014,
+          "maxResidentBytes": 5783552,
+          "matches": 200
+        },
+        {
+          "scenario": "literal",
+          "run": 1,
+          "order": 1,
+          "elapsedMs": 46.310457999999926,
+          "maxResidentBytes": 5783552,
+          "matches": 200
+        },
+        {
+          "scenario": "literal",
+          "run": 2,
+          "order": 0,
+          "elapsedMs": 50.28120799999988,
+          "maxResidentBytes": 5881856,
+          "matches": 200
+        },
+        {
+          "scenario": "literal",
+          "run": 3,
+          "order": 0,
+          "elapsedMs": 32.41616699999986,
+          "maxResidentBytes": 5718016,
+          "matches": 200
+        },
+        {
+          "scenario": "literal",
+          "run": 4,
+          "order": 1,
+          "elapsedMs": 32.5307499999999,
+          "maxResidentBytes": 5783552,
+          "matches": 200
+        },
+        {
+          "scenario": "literal",
+          "run": 5,
+          "order": 2,
+          "elapsedMs": 36.43949999999995,
+          "maxResidentBytes": 5849088,
+          "matches": 200
+        },
+        {
+          "scenario": "literal",
+          "run": 6,
+          "order": 2,
+          "elapsedMs": 29.033124999999927,
+          "maxResidentBytes": 5799936,
+          "matches": 200
+        },
+        {
+          "scenario": "literal",
+          "run": 7,
+          "order": 1,
+          "elapsedMs": 28.870124999999916,
+          "maxResidentBytes": 5750784,
+          "matches": 200
+        },
+        {
+          "scenario": "literal",
+          "run": 8,
+          "order": 0,
+          "elapsedMs": 29.516375000000153,
+          "maxResidentBytes": 5750784,
+          "matches": 200
+        },
+        {
+          "scenario": "regex",
+          "run": 0,
+          "order": 2,
+          "elapsedMs": 50.69758300000012,
+          "maxResidentBytes": 6258688,
+          "matches": 2000
+        },
+        {
+          "scenario": "regex",
+          "run": 1,
+          "order": 1,
+          "elapsedMs": 33.185667000000194,
+          "maxResidentBytes": 6209536,
+          "matches": 2000
+        },
+        {
+          "scenario": "regex",
+          "run": 2,
+          "order": 0,
+          "elapsedMs": 34.03366700000015,
+          "maxResidentBytes": 6193152,
+          "matches": 2000
+        },
+        {
+          "scenario": "regex",
+          "run": 3,
+          "order": 0,
+          "elapsedMs": 33.91341700000021,
+          "maxResidentBytes": 6176768,
+          "matches": 2000
+        },
+        {
+          "scenario": "regex",
+          "run": 4,
+          "order": 1,
+          "elapsedMs": 36.54350000000022,
+          "maxResidentBytes": 6373376,
+          "matches": 2000
+        },
+        {
+          "scenario": "regex",
+          "run": 5,
+          "order": 2,
+          "elapsedMs": 34.381417000000056,
+          "maxResidentBytes": 6111232,
+          "matches": 2000
+        },
+        {
+          "scenario": "regex",
+          "run": 6,
+          "order": 2,
+          "elapsedMs": 35.50624999999991,
+          "maxResidentBytes": 6176768,
+          "matches": 2000
+        },
+        {
+          "scenario": "regex",
+          "run": 7,
+          "order": 1,
+          "elapsedMs": 36.68904199999997,
+          "maxResidentBytes": 6111232,
+          "matches": 2000
+        },
+        {
+          "scenario": "regex",
+          "run": 8,
+          "order": 0,
+          "elapsedMs": 33.42966699999988,
+          "maxResidentBytes": 6193152,
+          "matches": 2000
+        }
+      ],
+      "summary": [
+        {
+          "scenario": "literal",
+          "medianMs": 32.5307499999999,
+          "minMs": 28.870124999999916,
+          "maxMs": 50.28120799999988,
+          "maxResidentBytes": 5881856
+        },
+        {
+          "scenario": "regex",
+          "medianMs": 34.381417000000056,
+          "minMs": 33.185667000000194,
+          "maxMs": 50.69758300000012,
+          "maxResidentBytes": 6373376
+        }
+      ]
+    }
+  ]
+}
