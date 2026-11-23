@@ -47,3 +47,5 @@ La release v0.9.0-alpha.1 contiene DMG macOS ARM64, NSIS Windows x64, AppImage/D
 - `tests/signing.test.cjs`: configuración y rechazo de credenciales ausentes. No equivale a firmar una aplicación.
 
 Para publicar nuevos instaladores, ejecutar `checks.yml` y `package-preview.yml` en el mismo commit. `publish-qualified-preview.yml` comprueba procedencia y exige los tres sistemas; genera una release draft sin firma de distribución. Una ejecución previa de otra versión no es suficiente.
+
+La ejecución pública 45280832573 aprobó los tres sistemas (91 unitarias/componentes, tres de recuperación y dos protocolos en cada uno, cero omisiones). Packaging 45280860635 y colector 45282761227 aprobaron el mismo commit. Se verificó una autorización GitHub nueva y el rechazo real de una credencial sintética inválida (401), sin revocar el token del usuario. La UI macOS 0.9.1 mostró el diagnóstico TypeScript y su desaparición al deshacer, así como sugerencias de console. Depuración/extensiones gráficas y accesibilidad completa siguen pendientes.

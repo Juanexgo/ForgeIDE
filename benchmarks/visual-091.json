@@ -1,0 +1,24 @@
+{
+  "date": "2026-11-23",
+  "version": "0.9.1-alpha.1",
+  "platform": "macOS arm64",
+  "workspace": "synthetic Forge QA fixture",
+  "approved": [
+    "open workspace and main.ts",
+    "paste/edit and save",
+    "TypeScript 2322 diagnostic in Problems",
+    "undo and return to zero problems",
+    "contextual console method suggestions"
+  ],
+  "notQualified": [
+    "visual refactoring",
+    "visual debugger",
+    "extension lifecycle",
+    "chat UI with real model",
+    "VoiceOver",
+    "IME composition",
+    "multiple display scales",
+    "full IDE performance"
+  ],
+  "limitations": "CUA capture failures and intermittent lock/physical-input reports interrupted the remaining flows. AX editor values sometimes lagged; final code was checked against the restored fixture. No failed attempt is recorded as passed."
+}

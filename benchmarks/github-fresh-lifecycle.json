@@ -1,0 +1,12 @@
+{
+  "date": "2026-11-23T22:45:07.146Z",
+  "repo": "Juanexgo/ForgeIDE",
+  "account": "Juanexgo",
+  "freshDeviceFlow": true,
+  "appDisconnectPersisted": true,
+  "sharedCredentialPreserved": true,
+  "reconnected": true,
+  "pushFetchPull": true,
+  "testBranchDeleted": true,
+  "scope": "Actual production GitHubService and GitService after fresh user-authorized device flow. App sign-out is local disconnection, not GitHub token revocation. Real credential expiry and graphical sign-in remain unqualified."
+}

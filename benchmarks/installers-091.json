@@ -1,0 +1,44 @@
+{
+  "version": "0.9.1-alpha.1",
+  "commit": "94972f6a46d6867c5d5361cf8594c2e6e8c816c4",
+  "checks": 45280832573,
+  "packages": 45280860635,
+  "assets": [
+    {
+      "name": "ForgeIDE-0.9.1-alpha.1-macOS-arm64.dmg",
+      "platform": "macOS",
+      "arch": "arm64",
+      "kind": "dmg",
+      "bytes": 350979666,
+      "sha256": "a00a5c386a8ea350deb88e9db4f9eeeccb6995d1ccfde4e12936a91e18593216",
+      "unsigned": true
+    },
+    {
+      "name": "ForgeIDE-0.9.1-alpha.1-Windows-x64.exe",
+      "platform": "Windows",
+      "arch": "x64",
+      "kind": "exe",
+      "bytes": 242992382,
+      "sha256": "3ab197c37ad138f47ae41a4b0c760b027e230e64c16bd15099cb6a06d28873e1",
+      "unsigned": true
+    },
+    {
+      "name": "ForgeIDE-0.9.1-alpha.1-Linux-x64.deb",
+      "platform": "Linux",
+      "arch": "x64",
+      "kind": "deb",
+      "bytes": 227093448,
+      "sha256": "3ad0e71741c38e050719f527fa7bb222ff887c7f8a28556557c90d991951c786",
+      "unsigned": true
+    },
+    {
+      "name": "ForgeIDE-0.9.1-alpha.1-Linux-x64.AppImage",
+      "platform": "Linux",
+      "arch": "x64",
+      "kind": "AppImage",
+      "bytes": 295420547,
+      "sha256": "3d3da2197ed2c85173936b7a9dff9cfcf1c0cb8a5fc385f0b099c34bc7607833",
+      "unsigned": true
+    }
+  ]
+}

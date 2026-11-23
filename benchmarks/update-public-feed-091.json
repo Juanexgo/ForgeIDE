@@ -1,0 +1,38 @@
+{
+  "date": "2026-11-23T23:02:38.611Z",
+  "available": {
+    "status": "available",
+    "current": "0.9.0-alpha.1",
+    "release": "0.9.1-alpha.1",
+    "artifact": {
+      "platform": "darwin",
+      "arch": "arm64",
+      "kind": "dmg",
+      "bytes": 350979666,
+      "sha256": "a00a5c386a8ea350deb88e9db4f9eeeccb6995d1ccfde4e12936a91e18593216",
+      "url": "https://github.com/Juanexgo/ForgeIDE/releases/download/v0.9.1-alpha.1/ForgeIDE-0.9.1-alpha.1-macOS-arm64.dmg"
+    },
+    "message": "Hay una versi\u00f3n firmada disponible. Revisa la versi\u00f3n antes de descargarla."
+  },
+  "current": {
+    "status": "current",
+    "current": "0.9.1-alpha.1",
+    "release": "0.9.1-alpha.1",
+    "message": "La versi\u00f3n publicada y su firma fueron verificadas."
+  },
+  "download": {
+    "status": "downloaded",
+    "current": "0.9.0-alpha.1",
+    "release": "0.9.1-alpha.1",
+    "artifact": {
+      "platform": "darwin",
+      "arch": "arm64",
+      "kind": "dmg",
+      "bytes": 350979666,
+      "sha256": "a00a5c386a8ea350deb88e9db4f9eeeccb6995d1ccfde4e12936a91e18593216",
+      "url": "https://github.com/Juanexgo/ForgeIDE/releases/download/v0.9.1-alpha.1/ForgeIDE-0.9.1-alpha.1-macOS-arm64.dmg"
+    },
+    "message": "Instalador verificado. Guarda tu trabajo y cierra ForgeIDE antes de instalarlo. No se ejecuta autom\u00e1ticamente."
+  },
+  "scope": "Actual public HTTPS feed, pinned production Ed25519 key, complete macOS installer streaming download with exact size/SHA256. No installer execution or OS signature claim."
+}

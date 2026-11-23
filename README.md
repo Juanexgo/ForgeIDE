@@ -1,4 +1,4 @@
-# ForgeIDE 0.9.0-alpha.1
+# ForgeIDE 0.9.1-alpha.1
 
 IDE desktop Theia 1.77.0 + Electron 44.9.1, TypeScript/React y un motor transaccional Rust. La versión nativa previa se conserva en legacy/native-0.6. Esta entrega es alpha: no certifica paridad universal con VS Code ni superioridad sobre otros IDE.
 
@@ -21,7 +21,7 @@ yarn start
 
 ## Usar Forge
 
-Cierra la versión anterior antes de abrir un paquete nuevo: una instancia ya abierta puede recibir el lanzamiento e impedir ver las mejoras. Guarda tu trabajo primero. La nueva interfaz muestra 0.9.0.
+Cierra la versión anterior antes de abrir un paquete nuevo: una instancia ya abierta puede recibir el lanzamiento e impedir ver las mejoras. Guarda tu trabajo primero. La interfaz identifica la serie 0.9; la versión exacta del paquete es 0.9.1-alpha.1.
 
 - Cmd/Ctrl+Alt+F abre Forge Control: propuestas, grafo, diagnóstico y herramientas de lenguaje.
 - Cmd/Ctrl+Alt+G abre Git: archivos, fragmentos, commits, ramas, comparación, conflictos, remotos, worktrees y PR.
@@ -44,7 +44,7 @@ node scripts/benchmark.mjs
 yarn package:mac
 ```
 
-El paquete macOS se escribe en dist-0.9/mac-arm64. macOS, Windows y Linux aprobaron la CI pública; los paquetes se generan nativamente en runners de cada sistema. Eso no sustituye pruebas gráficas de instalación y accesibilidad. La alpha carece de firma de distribución de Apple/Microsoft y notarización. Incluye comprobación de un feed Ed25519 y descarga manual verificada; no ejecuta actualizaciones automáticamente. El feed debe publicarse antes de que la comprobación remota tenga una versión disponible.
+El paquete macOS se escribe en dist-0.9/mac-arm64. macOS, Windows y Linux aprobaron la CI pública; los paquetes se generan nativamente en runners de cada sistema. Eso no sustituye pruebas gráficas de instalación y accesibilidad. La alpha carece de firma de distribución de Apple/Microsoft y notarización. Incluye comprobación de un feed Ed25519 y descarga manual verificada; no ejecuta actualizaciones automáticamente. El feed público se actualizó para 0.9.1 y se verificó la descarga completa del instalador macOS. La firma del feed no es una firma OS de los instaladores.
 
 ## Documentación
 
@@ -61,3 +61,9 @@ Solo se han validado localmente los flujos expresamente descritos en la evidenci
 ## Cambios 0.9 en validación
 
 Graph incremental añade análisis estático Python, Go, Rust y servicios Compose. Las propuestas de agentes tienen límites de tiempo y herramientas y una alternativa JSON revisable. GitHub permite desconectar ForgeIDE sin borrar credenciales compartidas. Pruebas reales de protocolo TypeScript y DAP complementan las pruebas locales; no sustituyen la validación visual ni de accesibilidad. Consulte docs/ESTADO-COMPLETO.md para límites y evidencia, sin asumir certificación multiplataforma.
+
+## Aceptación 0.9.1
+
+Los cuatro roles Forge aprobaron sus fixtures con un modelo local real, verificación Docker, aplicación y reversión. La CI pública aprobó 91 pruebas, tres casos de recuperación y dos protocolos en cada sistema. Se comprobó una autorización nueva de GitHub, desconexión/reconexión y operaciones remotas; un 401 real de GitHub con credencial de prueba inválida se rechaza sin tocar las credenciales del usuario. Consulte [IA local](docs/LOCAL-AI.md), [firma pendiente](docs/SIGNING.md) y [estado detallado](docs/ESTADO-COMPLETO.md).
+
+Comparación reproducible de búsqueda en macOS: `FORGE_BENCH_APP=/ruta/ForgeIDE.app yarn benchmark:search`. VS Code y Cursor se buscan en `/Applications`; sus rutas se pueden cambiar con `VSCODE_BENCH_APP` y `CURSOR_BENCH_APP`. Versiones y arquitectura se leen de las aplicaciones instaladas. Este ensayo compara sus motores CLI, sin certificar rendimiento del IDE completo.
